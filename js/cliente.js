@@ -30,7 +30,7 @@ async function carregarPratos() {
         console.log("Buscando pratos no Supabase...");
 
         const resposta = await fetch(
-            `${SUPABASE_URL}/rest/v1/pratos?select=*`,
+            `${SUPABASE_URL}/rest/v1/prato?select=*`,
             {
                 method: "GET",
 
@@ -135,6 +135,7 @@ function mostrarPratos(lista) {
         } else {
 
             preco.textContent = "R$ 0,00";
+
         }
 
 
@@ -164,6 +165,7 @@ function mostrarPratos(lista) {
             } else {
 
                 modalPreco.textContent = "R$ 0,00";
+
             }
 
             modal.style.display = "flex";
@@ -275,10 +277,5 @@ modal.addEventListener("click", (evento) => {
 /* =========================================
    INICIAR
 ========================================= */
-
-carregarPratos();
-    }
-);
-
 
 carregarPratos();
