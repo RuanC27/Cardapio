@@ -1,0 +1,428 @@
+/* =====================================================
+                    CONFIGURAÇÕES GERAIS
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#F8F4EC;
+    color:#2F2F2F;
+    min-height:100vh;
+}
+
+/* =====================================================
+                        HEADER
+===================================================== */
+
+header{
+    height:90px;
+    background:#243A17;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#E8C56A;
+    font-size:18px;
+}
+
+.pesquisa input{
+    width:320px;
+    height:48px;
+    border:none;
+    border-radius:12px;
+    padding:0 18px;
+    font-size:16px;
+    outline:none;
+}
+
+/* =====================================================
+                        BANNER
+===================================================== */
+
+.banner{
+    background:linear-gradient(rgba(36,58,23,.78), rgba(36,58,23,.78)),
+               url('../imagens/banner.jpg') center/cover no-repeat;
+    min-height:280px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.banner .texto{
+    max-width:700px;
+    color:white;
+}
+
+.banner h2{
+    font-size:56px;
+    margin-bottom:16px;
+}
+
+.banner p{
+    font-size:20px;
+    line-height:1.6;
+}
+
+/* =====================================================
+                    CATEGORIAS
+===================================================== */
+
+.categorias{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    padding:26px 20px;
+}
+
+.categoria{
+    border:none;
+    background:white;
+    padding:12px 22px;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.categoria:hover{
+    background:#ECE5D2;
+    transform:translateY(-2px);
+}
+
+.categoria.ativa{
+    background:#243A17;
+    color:white;
+}
+
+/* =====================================================
+                    CONTEÚDO PRINCIPAL
+===================================================== */
+
+main{
+    max-width:1400px;
+    margin:0 auto;
+    padding:10px 24px 50px;
+}
+
+/* =====================================================
+                    GRID DE PRATOS
+===================================================== */
+
+#listaPratos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:30px;
+    align-items:start;
+}
+
+/* =====================================================
+                        CARD
+===================================================== */
+
+.card{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 32px rgba(0,0,0,.15);
+}
+
+.imagem{
+    width:100%;
+    height:220px;
+    overflow:hidden;
+}
+
+.imagem img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s;
+}
+
+.card:hover .imagem img{
+    transform:scale(1.06);
+}
+
+.conteudo{
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:1;
+}
+
+.nome{
+    font-size:24px;
+    color:#243A17;
+}
+
+.descricao{
+    color:#666;
+    line-height:1.5;
+    min-height:72px;
+}
+
+.categoria{
+    align-self:flex-start;
+    background:#ECE5D2;
+    color:#243A17;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:none;
+}
+
+.rodape{
+    margin-top:auto;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+
+.preco{
+    font-size:28px;
+    font-weight:700;
+    color:#243A17;
+}
+
+/* =====================================================
+                        MODAL
+===================================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal.ativo{
+    display:flex;
+}
+
+.modal-content{
+    background:white;
+    width:min(560px,100%);
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+    animation:aparecer .25s ease;
+}
+
+.modal-content img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.modal-content h2{
+    padding:24px 24px 10px;
+    color:#243A17;
+    font-size:34px;
+}
+
+.modal-content p{
+    padding:0 24px;
+    color:#555;
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+.modal-infos{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 24px 24px;
+    font-weight:700;
+    color:#243A17;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+#modalCategoria{
+    background:#ECE5D2;
+    padding:8px 14px;
+    border-radius:999px;
+}
+
+#modalPreco{
+    font-size:28px;
+}
+
+#fecharModal{
+    position:absolute;
+    top:14px;
+    right:18px;
+    font-size:34px;
+    color:white;
+    cursor:pointer;
+    text-shadow:0 2px 6px rgba(0,0,0,.45);
+}
+
+/* =====================================================
+                        ANIMAÇÃO
+===================================================== */
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(12px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* =====================================================
+                        RODAPÉ
+===================================================== */
+
+footer{
+    margin-top:50px;
+    background:#243A17;
+    color:white;
+    text-align:center;
+    padding:26px;
+}
+
+footer p{
+    color:#E8C56A;
+}
+
+/* =====================================================
+                    RESPONSIVIDADE
+===================================================== */
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        justify-content:center;
+        gap:10px;
+        height:120px;
+        padding:10px 20px;
+        text-align:center;
+    }
+
+    .pesquisa input{
+        width:100%;
+        max-width:360px;
+    }
+
+    .banner h2{
+        font-size:42px;
+    }
+
+    .banner p{
+        font-size:18px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    header{
+        height:auto;
+        padding:16px;
+    }
+
+    .logo h1{
+        font-size:34px;
+    }
+
+    .logo span{
+        font-size:16px;
+    }
+
+    .banner{
+        min-height:220px;
+    }
+
+    .banner h2{
+        font-size:34px;
+    }
+
+    .banner p{
+        font-size:16px;
+    }
+
+    main{
+        padding:10px 16px 40px;
+    }
+
+    #listaPratos{
+        grid-template-columns:1fr;
+    }
+
+    .modal-content img{
+        height:240px;
+    }
+
+    .modal-content h2{
+        font-size:28px;
+    }
+
+    #modalPreco{
+        font-size:24px;
+    }
+
+}
+
+/* =====================================================
+                    SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#F8F4EC;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#243A17;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#355120;
+}
