@@ -1,0 +1,331 @@
+/* =========================================
+            PÁGINA INICIAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+            CORPO DA PÁGINA
+========================================= */
+
+body {
+
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #f5f5f5,
+        #e8e8e8
+    );
+
+}
+
+
+/* =========================================
+            ÁREA PRINCIPAL
+========================================= */
+
+.pagina-inicial {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+
+}
+
+
+/* =========================================
+            CABEÇALHO
+========================================= */
+
+.cabecalho {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+}
+
+
+.icone {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.cabecalho h1 {
+
+    font-size: 42px;
+
+    margin-bottom: 8px;
+
+    color: #222;
+
+}
+
+
+.cabecalho p {
+
+    font-size: 18px;
+
+    color: #777;
+
+}
+
+
+/* =========================================
+            CAIXA DE ESCOLHA
+========================================= */
+
+.escolha {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+
+}
+
+
+.escolha h2 {
+
+    text-align: center;
+
+    font-size: 28px;
+
+    color: #222;
+
+    margin-bottom: 10px;
+
+}
+
+
+.escolha > p {
+
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================================
+            BOTÕES
+========================================= */
+
+.opcao {
+
+    width: 100%;
+
+    border: none;
+
+    background: #f7f7f7;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+
+}
+
+
+.opcao:hover {
+
+    transform: translateY(-3px);
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+
+}
+
+
+.opcao:active {
+
+    transform: scale(0.98);
+
+}
+
+
+/* =========================================
+            EMOJI
+========================================= */
+
+.emoji {
+
+    font-size: 38px;
+
+    min-width: 55px;
+
+    text-align: center;
+
+}
+
+
+/* =========================================
+            TEXTOS DOS BOTÕES
+========================================= */
+
+.texto {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+.texto strong {
+
+    font-size: 20px;
+
+    color: #222;
+
+    margin-bottom: 5px;
+
+}
+
+
+.texto small {
+
+    font-size: 14px;
+
+    color: #777;
+
+}
+
+
+/* =========================================
+            SETA
+========================================= */
+
+.seta {
+
+    font-size: 30px;
+
+    color: #777;
+
+    transition: transform 0.2s;
+
+}
+
+
+.opcao:hover .seta {
+
+    transform: translateX(6px);
+
+}
+
+
+/* =========================================
+            RODAPÉ
+========================================= */
+
+footer {
+
+    margin-top: 35px;
+
+    text-align: center;
+
+}
+
+
+footer p {
+
+    color: #888;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+            RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .escolha {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .opcao {
+
+        padding: 18px;
+
+    }
+
+
+    .emoji {
+
+        font-size: 30px;
+
+        min-width: 45px;
+
+    }
+
+
+    .texto strong {
+
+        font-size: 17px;
+
+    }
+
+}
