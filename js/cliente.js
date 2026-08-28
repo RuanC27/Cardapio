@@ -1,7 +1,11 @@
-const API_URL = "http://localhost:8080/api/pratos";
+const SUPABASE_URL = "https://fmwmgoxjmcvsmfbcpfsj.supabase.co";
+const SUPABASE_KEY = "sb_publishable_ZJR2Z6gOfNO5rFhZb-RWwg_qvyY2b9Y";
 
 const listaPratos = document.getElementById("listaPratos");
 const template = document.getElementById("cardTemplate");
+
+const pesquisa = document.getElementById("pesquisa");
+const botoesCategoria = document.querySelectorAll(".categoria");
 
 const modal = document.getElementById("modal");
 const fecharModal = document.getElementById("fecharModal");
@@ -12,333 +16,267 @@ const modalDescricao = document.getElementById("modalDescricao");
 const modalCategoria = document.getElementById("modalCategoria");
 const modalPreco = document.getElementById("modalPreco");
 
-const campoPesquisa = document.getElementById("pesquisa");
-
-const botoesCategoria = document.querySelectorAll(
-    ".categorias button"
-);
-
 let pratos = [];
 
-let categoriaAtual = "Todos";
 
+/* =========================================
+   BUSCAR PRATOS NO SUPABASE
+========================================= */
 
 async function carregarPratos() {
 
     try {
 
-        console.log("Buscando pratos em:", API_URL);
+        console.log("Buscando pratos no Supabase...");
 
-        const resposta = await fetch(API_URL);
+        const resposta = await fetch(
+            `${SUPABASE_URL}/rest/v1/pratos?select=*`,
+            {
+                method: "GET",
+
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
 
         if (!resposta.ok) {
 
-            throw new Error(
-                "Erro HTTP: " + resposta.status
-            );
+            const erro = await resposta.text();
 
+            throw new Error(
+                `Erro ${resposta.status}: ${erro}`
+            );
         }
 
         pratos = await resposta.json();
 
-        console.log(
-            "Pratos recebidos:",
-            pratos
-        );
+        console.log("Pratos recebidos:", pratos);
 
-        aplicarFiltros();
+        mostrarPratos(pratos);
 
     } catch (erro) {
 
-        console.error(
-            "Erro ao carregar pratos:",
-            erro
-        );
+        console.error("ERRO AO BUSCAR PRATOS:", erro);
 
         listaPratos.innerHTML = `
-            <p style="
-                grid-column: 1 / -1;
-                text-align: center;
-                font-size: 20px;
-                padding: 40px;
-            ">
-                Erro ao carregar os pratos.
+            <p class="erro">
+                Não foi possível carregar os pratos.
             </p>
         `;
-
     }
-
 }
 
 
-function aplicarFiltros() {
+/* =========================================
+   MOSTRAR PRATOS
+========================================= */
 
-    const pesquisa = campoPesquisa.value
-        .toLowerCase()
-        .trim();
-
+function mostrarPratos(lista) {
 
     listaPratos.innerHTML = "";
 
-
-    const pratosFiltrados = pratos.filter(
-        prato => {
-
-            const nome = (prato.nome || "")
-                .toLowerCase();
-
-            const descricao =
-                (prato.descricao || "")
-                .toLowerCase();
-
-
-            const correspondePesquisa =
-
-                nome.includes(pesquisa)
-
-                ||
-
-                descricao.includes(pesquisa);
-
-
-            const correspondeCategoria =
-
-                categoriaAtual === "Todos"
-
-                ||
-
-                prato.categoria === categoriaAtual;
-
-
-            return (
-                correspondePesquisa
-                &&
-                correspondeCategoria
-            );
-
-        }
-    );
-
-
-    if (pratosFiltrados.length === 0) {
+    if (lista.length === 0) {
 
         listaPratos.innerHTML = `
-            <p style="
-                grid-column: 1 / -1;
-                text-align: center;
-                font-size: 20px;
-                padding: 40px;
-            ">
-                Nenhum prato encontrado.
-            </p>
+            <p>Nenhum prato cadastrado.</p>
         `;
 
         return;
-
     }
 
+    lista.forEach(prato => {
 
-    pratosFiltrados.forEach(
-        prato => {
+        const card = template.content.cloneNode(true);
 
-            criarCard(prato);
+        const elementoCard = card.querySelector(".card");
 
+        const imagem = card.querySelector(".imagem img");
+        const nome = card.querySelector(".nome");
+        const descricao = card.querySelector(".descricao");
+        const categoria = card.querySelector(".categoria");
+        const preco = card.querySelector(".preco");
+
+
+        /* IMAGEM */
+
+        imagem.src = prato.imagem || "imagens/sem-imagem.png";
+
+        imagem.alt = prato.nome || "Prato";
+
+
+        /* NOME */
+
+        nome.textContent = prato.nome || "Sem nome";
+
+
+        /* DESCRIÇÃO */
+
+        descricao.textContent =
+            prato.descricao || "Sem descrição";
+
+
+        /* CATEGORIA */
+
+        categoria.textContent =
+            prato.categoria || "";
+
+
+        /* PREÇO */
+
+        const valor = Number(prato.preco);
+
+        if (!isNaN(valor)) {
+
+            preco.textContent =
+                `R$ ${valor.toFixed(2).replace(".", ",")}`;
+
+        } else {
+
+            preco.textContent = "R$ 0,00";
         }
-    );
+
+
+        /* =====================================
+           ABRIR MODAL
+        ===================================== */
+
+        elementoCard.addEventListener("click", () => {
+
+            modalImagem.src =
+                prato.imagem || "imagens/sem-imagem.png";
+
+            modalNome.textContent =
+                prato.nome || "";
+
+            modalDescricao.textContent =
+                prato.descricao || "";
+
+            modalCategoria.textContent =
+                prato.categoria || "";
+
+            if (!isNaN(valor)) {
+
+                modalPreco.textContent =
+                    `R$ ${valor.toFixed(2).replace(".", ",")}`;
+
+            } else {
+
+                modalPreco.textContent = "R$ 0,00";
+            }
+
+            modal.style.display = "flex";
+
+        });
+
+
+        listaPratos.appendChild(card);
+
+    });
 
 }
 
 
-function criarCard(prato) {
+/* =========================================
+   PESQUISA
+========================================= */
 
-    const clone =
-        template.content.cloneNode(true);
+pesquisa.addEventListener("input", () => {
 
+    const texto =
+        pesquisa.value.toLowerCase().trim();
 
-    const imagem =
-        clone.querySelector(".imagem img");
+    const resultado = pratos.filter(prato => {
 
-    const nome =
-        clone.querySelector(".nome");
+        const nome =
+            (prato.nome || "").toLowerCase();
 
-    const descricao =
-        clone.querySelector(".descricao");
+        const descricao =
+            (prato.descricao || "").toLowerCase();
 
-    const categoria =
-        clone.querySelector(".categoria");
+        return (
+            nome.includes(texto) ||
+            descricao.includes(texto)
+        );
 
-    const preco =
-        clone.querySelector(".preco");
+    });
 
+    mostrarPratos(resultado);
 
-    if (
-        prato.imagem &&
-        prato.imagem.trim() !== ""
-    ) {
-
-        imagem.src = prato.imagem;
-
-    } else {
-
-        imagem.src =
-            "imagens/sem-imagem.png";
-
-    }
+});
 
 
-    imagem.onerror = function () {
+/* =========================================
+   FILTRO POR CATEGORIA
+========================================= */
 
-        this.src =
-            "imagens/sem-imagem.png";
+botoesCategoria.forEach(botao => {
 
-    };
+    botao.addEventListener("click", () => {
 
+        botoesCategoria.forEach(b =>
+            b.classList.remove("ativa")
+        );
 
-    nome.textContent =
-        prato.nome || "Sem nome";
+        botao.classList.add("ativa");
 
-
-    descricao.textContent =
-        prato.descricao || "Sem descrição";
-
-
-    categoria.textContent =
-        prato.categoria || "Sem categoria";
+        const categoriaSelecionada =
+            botao.dataset.categoria;
 
 
-    preco.textContent =
-        "R$ " +
-        Number(prato.preco || 0)
-            .toFixed(2)
-            .replace(".", ",");
+        if (categoriaSelecionada === "Todos") {
 
+            mostrarPratos(pratos);
 
-    const card =
-        clone.querySelector(".card");
-
-
-    card.addEventListener(
-        "click",
-        function () {
-
-            abrirModal(prato);
-
+            return;
         }
-    );
 
 
-    listaPratos.appendChild(clone);
+        const resultado = pratos.filter(prato => {
 
-}
+            return prato.categoria === categoriaSelecionada;
 
+        });
 
-function abrirModal(prato) {
+        mostrarPratos(resultado);
 
-    modalImagem.src =
-        prato.imagem ||
-        "imagens/sem-imagem.png";
+    });
 
-
-    modalImagem.onerror = function () {
-
-        this.src =
-            "imagens/sem-imagem.png";
-
-    };
+});
 
 
-    modalNome.textContent =
-        prato.nome || "Sem nome";
+/* =========================================
+   FECHAR MODAL
+========================================= */
+
+fecharModal.addEventListener("click", () => {
+
+    modal.style.display = "none";
+
+});
 
 
-    modalDescricao.textContent =
-        prato.descricao ||
-        "Sem descrição";
+/* =========================================
+   FECHAR CLICANDO FORA
+========================================= */
 
+modal.addEventListener("click", (evento) => {
 
-    modalCategoria.textContent =
-        prato.categoria ||
-        "Sem categoria";
-
-
-    modalPreco.textContent =
-        "R$ " +
-        Number(prato.preco || 0)
-            .toFixed(2)
-            .replace(".", ",");
-
-
-    modal.style.display = "flex";
-
-}
-
-
-fecharModal.addEventListener(
-    "click",
-    function () {
+    if (evento.target === modal) {
 
         modal.style.display = "none";
 
     }
-);
+
+});
 
 
-window.addEventListener(
-    "click",
-    function (evento) {
+/* =========================================
+   INICIAR
+========================================= */
 
-        if (evento.target === modal) {
-
-            modal.style.display = "none";
-
-        }
-
-    }
-);
-
-
-campoPesquisa.addEventListener(
-    "input",
-    function () {
-
-        aplicarFiltros();
-
-    }
-);
-
-
-botoesCategoria.forEach(
-    botao => {
-
-        botao.addEventListener(
-            "click",
-            function () {
-
-                botoesCategoria.forEach(
-                    outroBotao => {
-
-                        outroBotao.classList.remove(
-                            "ativa"
-                        );
-
-                    }
-                );
-
-
-                botao.classList.add(
-                    "ativa"
-                );
-
-
-                categoriaAtual =
-                    botao.dataset.categoria;
-
-
-                aplicarFiltros();
-
-            }
-        );
-
+carregarPratos();
     }
 );
 
