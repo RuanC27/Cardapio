@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cardápio Digital</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+
+            <h1>🍴 Cardápio</h1>
+
+            <span>Sabores que conectam</span>
+
+        </div>
+
+        <div class="pesquisa">
+
+            <input
+                type="text"
+                id="pesquisa"
+                placeholder="Pesquisar prato...">
+
+        </div>
+
+    </header>
+
+    <!-- ================= BANNER ================= -->
+
+    <section class="banner">
+
+        <div class="texto">
+
+            <h2>Bem-vindo!</h2>
+
+            <p>
+
+                Escolha entre nossos deliciosos pratos preparados com ingredientes selecionados.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ================= CATEGORIAS ================= -->
+
+    <section class="categorias">
+
+        <button class="categoria ativa" data-categoria="Todos">
+            Todos
+        </button>
+
+        <button class="categoria" data-categoria="Entradas">
+            Entradas
+        </button>
+
+        <button class="categoria" data-categoria="Pratos Principais">
+            Pratos Principais
+        </button>
+
+        <button class="categoria" data-categoria="Bebidas">
+            Bebidas
+        </button>
+
+        <button class="categoria" data-categoria="Sobremesas">
+            Sobremesas
+        </button>
+
+    </section>
+
+    <!-- ================= LISTA DE PRATOS ================= -->
+
+    <main>
+
+        <div id="listaPratos">
+
+            <!--
+                Os pratos serão criados automaticamente
+                pelo JavaScript após consultar a API.
+            -->
+
+        </div>
+
+    </main>
+
+    <!-- ================= MODAL ================= -->
+
+    <div id="modal" class="modal">
+
+        <div class="modal-content">
+
+            <span id="fecharModal">
+
+                &times;
+
+            </span>
+
+            <img
+                id="modalImagem"
+                src=""
+                alt="Prato">
+
+            <h2 id="modalNome">
+
+            </h2>
+
+            <p id="modalDescricao">
+
+            </p>
+
+            <div class="modal-infos">
+
+                <span id="modalCategoria">
+
+                </span>
+
+                <span id="modalPreco">
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= TEMPLATE ================= -->
+
+    <template id="cardTemplate">
+
+        <div class="card">
+
+            <div class="imagem">
+
+                <img src="" alt="Prato">
+
+            </div>
+
+            <div class="conteudo">
+
+                <h3 class="nome">
+
+                </h3>
+
+                <p class="descricao">
+
+                </p>
+
+                <span class="categoria">
+
+                </span>
+
+                <div class="rodape">
+
+                    <span class="preco">
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+    <script src="js/cliente.js"></script>
+
+</body>
+
+</html>
