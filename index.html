@@ -2,20 +2,19 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Cardápio Digital</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =====================================
+         CABEÇALHO
+    ====================================== -->
 
     <header>
 
@@ -23,130 +22,150 @@
 
             <h1>🍴 Cardápio</h1>
 
-            <span>Sabores que conectam</span>
+            <span>
+                Sabores que conectam
+            </span>
 
         </div>
+
 
         <div class="pesquisa">
 
             <input
                 type="text"
                 id="pesquisa"
-                placeholder="Pesquisar prato...">
+                placeholder="Pesquisar prato..."
+            >
 
         </div>
 
     </header>
 
-    <!-- ================= BANNER ================= -->
+
+    <!-- =====================================
+         BANNER
+    ====================================== -->
 
     <section class="banner">
 
         <div class="texto">
 
-            <h2>Bem-vindo!</h2>
+            <h2>
+                Bem-vindo!
+            </h2>
 
             <p>
-
-                Escolha entre nossos deliciosos pratos preparados com ingredientes selecionados.
-
+                Escolha entre nossos deliciosos pratos preparados
+                com ingredientes selecionados.
             </p>
 
         </div>
 
     </section>
 
-    <!-- ================= CATEGORIAS ================= -->
+
+    <!-- =====================================
+         CATEGORIAS
+    ====================================== -->
 
     <section class="categorias">
 
-        <button class="categoria ativa" data-categoria="Todos">
+        <button
+            class="categoria ativa"
+            data-categoria="Todos"
+        >
             Todos
         </button>
 
-        <button class="categoria" data-categoria="Entradas">
+        <button
+            class="categoria"
+            data-categoria="Entradas"
+        >
             Entradas
         </button>
 
-        <button class="categoria" data-categoria="Pratos Principais">
+        <button
+            class="categoria"
+            data-categoria="Pratos Principais"
+        >
             Pratos Principais
         </button>
 
-        <button class="categoria" data-categoria="Bebidas">
+        <button
+            class="categoria"
+            data-categoria="Bebidas"
+        >
             Bebidas
         </button>
 
-        <button class="categoria" data-categoria="Sobremesas">
+        <button
+            class="categoria"
+            data-categoria="Sobremesas"
+        >
             Sobremesas
         </button>
 
     </section>
 
-    <!-- ================= LISTA DE PRATOS ================= -->
+
+    <!-- =====================================
+         LISTA DE PRATOS
+    ====================================== -->
 
     <main>
 
-        <div id="listaPratos">
-
-            <!--
-                Os pratos serão criados automaticamente
-                pelo JavaScript após consultar a API.
-            -->
-
-        </div>
+        <div id="listaPratos"></div>
 
     </main>
 
-    <!-- ================= MODAL ================= -->
 
-    <div id="modal" class="modal">
+    <!-- =====================================
+         MODAL DO PRATO
+    ====================================== -->
+
+    <div
+        id="modal"
+        class="modal"
+    >
 
         <div class="modal-content">
 
             <span id="fecharModal">
-
                 &times;
-
             </span>
+
 
             <img
                 id="modalImagem"
                 src=""
-                alt="Prato">
+                alt="Prato"
+            >
 
-            <h2 id="modalNome">
 
-            </h2>
+            <h2 id="modalNome"></h2>
 
-            <p id="modalDescricao">
 
-            </p>
+            <p id="modalDescricao"></p>
 
-            <!-- QUANTIDADE -->
 
             <div
                 id="modalQuantidade"
                 class="modal-quantidade"
-            >
+            ></div>
 
-            </div>
 
             <div class="modal-infos">
 
-                <span id="modalCategoria">
+                <span id="modalCategoria"></span>
 
-                </span>
-
-                <!-- PREÇO NORMAL -->
-
-                <span id="modalPreco">
-
-                </span>
+                <span id="modalPreco"></span>
 
             </div>
 
 
-            <!-- PREÇOS POR TAMANHO -->
+            <!-- =====================================
+                 PREÇOS POR TAMANHO
+            ====================================== -->
 
             <div
                 id="modalPrecosTamanho"
@@ -156,31 +175,38 @@
                 <div
                     id="modalPrecoPequeno"
                     class="preco-tamanho"
-                >
-
-                </div>
+                ></div>
 
                 <div
                     id="modalPrecoMedio"
                     class="preco-tamanho"
-                >
-
-                </div>
+                ></div>
 
                 <div
                     id="modalPrecoGrande"
                     class="preco-tamanho"
-                >
-
-                </div>
+                ></div>
 
             </div>
+
+
+            <!-- =====================================
+                 ALERGIAS
+            ====================================== -->
+
+            <div
+                id="modalAlergias"
+                class="modal-alergias"
+            ></div>
 
         </div>
 
     </div>
 
-    <!-- ================= TEMPLATE ================= -->
+
+    <!-- =====================================
+         MODELO DO CARD
+    ====================================== -->
 
     <template id="cardTemplate">
 
@@ -188,64 +214,66 @@
 
             <div class="imagem">
 
-                <img src="" alt="Prato">
+                <img
+                    src=""
+                    alt="Prato"
+                >
 
             </div>
 
+
             <div class="conteudo">
 
-                <h3 class="nome">
+                <h3 class="nome"></h3>
 
-                </h3>
 
-                <p class="descricao">
+                <p class="descricao"></p>
 
-                </p>
 
-                <!-- QUANTIDADE -->
+                <span class="quantidade"></span>
 
-                <span class="quantidade">
 
-                </span>
+                <span class="categoria"></span>
 
-                <span class="categoria">
-
-                </span>
 
                 <div class="rodape">
 
-                    <!-- PREÇO NORMAL -->
-
-                    <span class="preco">
-
-                    </span>
+                    <span class="preco"></span>
 
                 </div>
 
 
-                <!-- PREÇOS POR TAMANHO -->
+                <!-- =====================================
+                     PREÇOS POR TAMANHO
+                ====================================== -->
 
                 <div class="precos-tamanho">
 
-                    <span class="preco-pequeno">
+                    <span class="preco-pequeno"></span>
 
-                    </span>
+                    <span class="preco-medio"></span>
 
-                    <span class="preco-medio">
-
-                    </span>
-
-                    <span class="preco-grande">
-
-                    </span>
+                    <span class="preco-grande"></span>
 
                 </div>
+
+
+                <!-- =====================================
+                     ALERGIAS DO PRATO
+                ====================================== -->
+
+                <div class="alergias"></div>
 
             </div>
 
         </div>
 
     </template>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
 
     <script src="js/cliente.js"></script>
 
