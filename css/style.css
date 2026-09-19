@@ -6,12 +6,20 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    font-family:
+        'Segoe UI',
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
 }
 
 body{
-    background:#F8F4EC;
-    color:#2F2F2F;
+    background:#FFF8F2;
+
+    color:#3A2929;
+
     min-height:100vh;
 }
 
@@ -22,36 +30,74 @@ body{
 
 header{
     height:90px;
-    background:#243A17;
+
+    background:#D95F59;
+
     color:white;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     padding:0 50px;
-    box-shadow:0 3px 15px rgba(0,0,0,.15);
+
+    box-shadow:
+        0 3px 15px rgba(100,30,30,.18);
+
     position:sticky;
+
     top:0;
+
     z-index:100;
 }
 
+
 .logo h1{
     font-size:42px;
-    font-weight:700;
+
+    font-weight:800;
+
+    letter-spacing:-1px;
 }
 
+
 .logo span{
-    color:#E8C56A;
+    color:#FFE1C7;
+
     font-size:18px;
+
+    font-weight:500;
 }
+
 
 .pesquisa input{
     width:320px;
+
     height:48px;
+
     border:none;
+
     border-radius:12px;
+
     padding:0 18px;
+
     font-size:16px;
+
     outline:none;
+
+    background:white;
+
+    color:#4A2929;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.08);
+}
+
+
+.pesquisa input::placeholder{
+    color:#9B7777;
 }
 
 
@@ -60,17 +106,21 @@ header{
 ===================================================== */
 
 .banner{
+
     background:
         linear-gradient(
-            rgba(36,58,23,.78),
-            rgba(36,58,23,.78)
+            rgba(122,41,41,.72),
+            rgba(217,95,89,.72)
         ),
-        url('../imagens/banner.jpg') center/cover no-repeat;
+        url('../imagens/banner.jpg')
+        center/cover no-repeat;
 
     min-height:280px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -78,18 +128,26 @@ header{
     padding:40px 20px;
 }
 
+
 .banner .texto{
-    max-width:700px;
+    max-width:750px;
+
     color:white;
 }
 
+
 .banner h2{
     font-size:56px;
+
     margin-bottom:16px;
+
+    font-weight:800;
 }
+
 
 .banner p{
     font-size:20px;
+
     line-height:1.6;
 }
 
@@ -99,33 +157,64 @@ header{
 ===================================================== */
 
 .categorias{
+
     display:flex;
+
     justify-content:center;
-    gap:14px;
+
+    gap:12px;
+
     flex-wrap:wrap;
-    padding:26px 20px;
+
+    padding:28px 20px;
 }
+
 
 .categoria{
+
     border:none;
+
     background:white;
+
+    color:#7A2929;
+
     padding:12px 22px;
+
     border-radius:999px;
+
     font-size:15px;
-    font-weight:600;
+
+    font-weight:700;
+
     cursor:pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-    transition:.25s;
+
+    box-shadow:
+        0 3px 10px rgba(120,40,40,.08);
+
+    transition:
+        .25s;
 }
+
 
 .categoria:hover{
-    background:#ECE5D2;
-    transform:translateY(-2px);
+
+    background:#FCE8E5;
+
+    color:#7A2929;
+
+    transform:
+        translateY(-2px);
 }
 
+
 .categoria.ativa{
-    background:#243A17;
+
+    background:#D95F59;
+
     color:white;
+
+    box-shadow:
+        0 5px 14px rgba(217,95,89,.30);
 }
 
 
@@ -134,9 +223,15 @@ header{
 ===================================================== */
 
 main{
+
     max-width:1250px;
+
     margin:0 auto;
-    padding:10px 30px 60px;
+
+    padding:
+        10px
+        30px
+        60px;
 }
 
 
@@ -145,19 +240,24 @@ main{
 ===================================================== */
 
 #listaPratos{
+
     display:flex;
+
     flex-direction:column;
+
     gap:0;
 
     background:white;
 
-    border:1px solid #E4DCCB;
-    border-radius:12px;
+    border:
+        1px solid #EBCBC5;
+
+    border-radius:14px;
 
     overflow:hidden;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,.06);
+        0 6px 25px rgba(100,40,40,.08);
 }
 
 
@@ -165,16 +265,14 @@ main{
                         CARD
 ===================================================== */
 
-/*
-   Agora cada prato funciona como uma linha
-   de cardápio, semelhante à imagem enviada.
-*/
-
 .card{
+
     background:white;
 
     border:none;
-    border-bottom:1px solid #DED5C2;
+
+    border-bottom:
+        1px solid #E8D6D0;
 
     border-radius:0;
 
@@ -184,36 +282,37 @@ main{
 
     display:grid;
 
-    grid-template-columns:100px minmax(0,1fr) 300px;
+    grid-template-columns:
+        125px
+        minmax(0,1fr)
+        320px;
 
     align-items:center;
 
-    min-height:145px;
+    min-height:165px;
+
+    position:relative;
 
     transition:
         background .2s ease,
         box-shadow .2s ease;
-
-    position:relative;
 }
 
 
-/* Remove a borda do último prato */
-
 .card:last-child{
+
     border-bottom:none;
 }
 
 
-/* Efeito ao passar o mouse */
-
 .card:hover{
+
     transform:none;
 
-    background:#FFFDF8;
+    background:#FFFDFC;
 
     box-shadow:
-        inset 5px 0 0 #243A17;
+        inset 6px 0 0 #D95F59;
 }
 
 
@@ -222,34 +321,46 @@ main{
 ===================================================== */
 
 .imagem{
-    width:78px;
-    height:78px;
+
+    width:105px;
+
+    height:105px;
 
     margin-left:18px;
 
-    border-radius:50%;
+    border-radius:14px;
 
     overflow:hidden;
 
     flex-shrink:0;
 
-    border:3px solid #F0E8D7;
+    border:
+        3px solid #F3C2BD;
 
-    background:#F3ECDD;
+    background:#FCE8E5;
+
+    box-shadow:
+        0 4px 12px rgba(120,40,40,.12);
 }
 
+
 .imagem img{
+
     width:100%;
+
     height:100%;
 
     object-fit:cover;
 
     transition:
-        transform .3s ease;
+        transform .35s ease;
 }
 
+
 .card:hover .imagem img{
-    transform:scale(1.08);
+
+    transform:
+        scale(1.07);
 }
 
 
@@ -258,11 +369,17 @@ main{
 ===================================================== */
 
 .conteudo{
+
     min-width:0;
 
-    padding:20px 20px 20px 10px;
+    padding:
+        22px
+        20px
+        22px
+        8px;
 
     display:flex;
+
     flex-direction:column;
 
     gap:7px;
@@ -274,11 +391,12 @@ main{
 ===================================================== */
 
 .card .nome{
-    font-size:25px;
+
+    font-size:26px;
 
     line-height:1.15;
 
-    color:#243A17;
+    color:#7A2929;
 
     font-weight:800;
 
@@ -291,9 +409,10 @@ main{
 ===================================================== */
 
 .card .descricao{
-    color:#5F5F5F;
 
-    line-height:1.35;
+    color:#684F4F;
+
+    line-height:1.4;
 
     font-size:15px;
 
@@ -301,7 +420,7 @@ main{
 
     margin:0;
 
-    max-width:700px;
+    max-width:720px;
 }
 
 
@@ -309,32 +428,27 @@ main{
                     CATEGORIA
 ===================================================== */
 
-/*
-   Importante:
-   usamos ".card .categoria" para não
-   interferir nos botões de categoria.
-*/
-
 .card .categoria{
+
     align-self:flex-start;
 
     background:transparent;
 
-    color:#8A7450;
+    color:#B85A54;
 
     padding:0;
 
     border-radius:0;
 
-    font-size:12px;
+    font-size:11px;
 
-    font-weight:700;
+    font-weight:800;
 
     box-shadow:none;
 
     text-transform:uppercase;
 
-    letter-spacing:.5px;
+    letter-spacing:.7px;
 
     cursor:default;
 }
@@ -345,13 +459,14 @@ main{
 ===================================================== */
 
 .rodape{
+
     display:flex;
 
     align-items:center;
 
     justify-content:flex-start;
 
-    margin-top:2px;
+    margin-top:3px;
 
     gap:12px;
 }
@@ -362,11 +477,18 @@ main{
 ===================================================== */
 
 .preco{
-    font-size:20px;
+
+    font-size:21px;
 
     font-weight:800;
 
-    color:#243A17;
+    color:#D95F59;
+}
+
+
+.card .rodape .preco:empty{
+
+    display:none;
 }
 
 
@@ -374,31 +496,26 @@ main{
                 PREÇOS POR TAMANHO
 ===================================================== */
 
-/*
-   A área de preços fica à direita,
-   semelhante à imagem de referência.
-*/
-
 .card .precos-tamanho{
+
     display:flex;
 
     align-items:center;
 
     justify-content:center;
 
-    gap:28px;
+    gap:22px;
 
-    width:300px;
+    width:320px;
 
-    padding:0 20px;
+    padding:
+        0
+        18px;
 }
 
 
-/*
-   Cada preço recebe uma coluna.
-*/
-
 .card .preco-tamanho{
+
     display:flex;
 
     flex-direction:column;
@@ -407,27 +524,27 @@ main{
 
     justify-content:center;
 
-    min-width:65px;
+    min-width:70px;
 
-    color:#243A17;
+    color:#D95F59;
 
-    font-size:15px;
+    font-size:16px;
 
-    font-weight:700;
+    font-weight:800;
 
-    line-height:1.3;
+    line-height:1.35;
 
-    position:relative;
+    text-align:center;
 }
 
 
-/*
-   Criamos P / M / G visualmente
-   através do texto existente.
-*/
+/* =====================================================
+                DESTAQUE DOS PREÇOS
+===================================================== */
 
-.card .preco-tamanho::first-line{
-    font-weight:800;
+.card .preco-tamanho::first-letter{
+
+    color:#7A2929;
 }
 
 
@@ -436,7 +553,8 @@ main{
 ===================================================== */
 
 .card .alergias{
-    margin-top:7px;
+
+    margin-top:8px;
 
     display:flex;
 
@@ -446,12 +564,13 @@ main{
 
     font-size:12px;
 
-    color:#6C5B42;
+    color:#6C5050;
 }
 
 
 .card .alergias strong{
-    color:#8A3D24;
+
+    color:#B43F3F;
 
     font-size:12px;
 
@@ -460,6 +579,7 @@ main{
 
 
 .alergias-lista{
+
     display:flex;
 
     align-items:center;
@@ -471,28 +591,38 @@ main{
 
 
 .alergia-item{
+
     display:flex;
 
     align-items:center;
 
     gap:5px;
 
-    background:#F8F1E3;
+    background:#FCE8E5;
 
-    border:1px solid #E7DCC7;
+    border:
+        1px solid #F3C2BD;
 
     border-radius:20px;
 
-    padding:3px 8px 3px 4px;
+    padding:
+        3px
+        9px
+        3px
+        4px;
 
     font-size:11px;
 
-    color:#604D35;
+    color:#7A2929;
+
+    font-weight:600;
 }
 
 
 .alergia-item img{
+
     width:23px;
+
     height:23px;
 
     object-fit:cover;
@@ -502,26 +632,19 @@ main{
 
 
 /* =====================================================
-                    PREÇO PRINCIPAL
-===================================================== */
-
-.card .rodape .preco:empty{
-    display:none;
-}
-
-
-/* =====================================================
-                    MODAL
+                        MODAL
 ===================================================== */
 
 .modal{
+
     display:none;
 
     position:fixed;
 
     inset:0;
 
-    background:rgba(0,0,0,.65);
+    background:
+        rgba(75,25,25,.65);
 
     justify-content:center;
 
@@ -531,15 +654,19 @@ main{
 
     z-index:1000;
 
-    backdrop-filter:blur(3px);
+    backdrop-filter:
+        blur(3px);
 }
 
+
 .modal.ativo{
+
     display:flex;
 }
 
 
 .modal-content{
+
     background:white;
 
     width:min(600px,100%);
@@ -554,14 +681,17 @@ main{
 
     position:relative;
 
-    animation:aparecer .25s ease;
+    animation:
+        aparecer .25s ease;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.3);
+        0 20px 60px
+        rgba(80,30,30,.30);
 }
 
 
 .modal-content img{
+
     width:100%;
 
     height:300px;
@@ -571,18 +701,25 @@ main{
 
 
 .modal-content h2{
-    padding:24px 28px 10px;
 
-    color:#243A17;
+    padding:
+        24px
+        28px
+        10px;
+
+    color:#7A2929;
 
     font-size:34px;
 }
 
 
 .modal-content p{
-    padding:0 28px;
 
-    color:#555;
+    padding:
+        0
+        28px;
+
+    color:#684F4F;
 
     line-height:1.7;
 
@@ -595,17 +732,21 @@ main{
 ===================================================== */
 
 .modal-infos{
+
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
 
-    padding:0 28px 20px;
+    padding:
+        0
+        28px
+        20px;
 
     font-weight:700;
 
-    color:#243A17;
+    color:#7A2929;
 
     gap:12px;
 
@@ -614,16 +755,24 @@ main{
 
 
 #modalCategoria{
-    background:#ECE5D2;
 
-    padding:8px 14px;
+    background:#FCE8E5;
+
+    color:#7A2929;
+
+    padding:
+        8px
+        14px;
 
     border-radius:999px;
 }
 
 
 #modalPreco{
+
     font-size:28px;
+
+    color:#D95F59;
 }
 
 
@@ -632,9 +781,13 @@ main{
 ===================================================== */
 
 #modalQuantidade{
-    padding:0 28px 10px;
 
-    color:#6A5B44;
+    padding:
+        0
+        28px
+        10px;
+
+    color:#765858;
 
     font-size:14px;
 
@@ -647,6 +800,7 @@ main{
 ===================================================== */
 
 #modalPrecosTamanho{
+
     display:flex;
 
     justify-content:center;
@@ -655,26 +809,31 @@ main{
 
     gap:35px;
 
-    margin:5px 28px 20px;
+    margin:
+        5px
+        28px
+        20px;
 
     padding:18px;
 
-    background:#F8F4EC;
+    background:#FFF5F2;
+
+    border:
+        1px solid #F0D1CC;
 
     border-radius:12px;
-
-    border:1px solid #E7DDCA;
 }
 
 
 .modal-preco-tamanho{
+
     display:flex;
 
     align-items:center;
 
     justify-content:center;
 
-    color:#243A17;
+    color:#D95F59;
 
     font-weight:800;
 
@@ -687,17 +846,22 @@ main{
 ===================================================== */
 
 .modal-alergias{
-    margin:0 28px 28px;
+
+    margin:
+        0
+        28px
+        28px;
 
     padding:18px;
 
-    background:#FFF8EF;
+    background:#FFF7F5;
 
-    border:1px solid #E8DCC8;
+    border:
+        1px solid #F0D1CC;
 
     border-radius:12px;
 
-    color:#6B4C32;
+    color:#6B4C4C;
 
     display:flex;
 
@@ -708,18 +872,21 @@ main{
 
 
 .modal-alergias:empty{
+
     display:none;
 }
 
 
 .modal-alergias strong{
-    color:#8A3D24;
+
+    color:#B43F3F;
 
     font-size:15px;
 }
 
 
 .modal-alergias-lista{
+
     display:flex;
 
     flex-wrap:wrap;
@@ -729,6 +896,7 @@ main{
 
 
 .modal-alergia-item{
+
     display:flex;
 
     align-items:center;
@@ -737,19 +905,27 @@ main{
 
     background:white;
 
-    border:1px solid #E2D6C0;
+    border:
+        1px solid #E9CCC7;
 
     border-radius:20px;
 
-    padding:5px 10px 5px 5px;
+    padding:
+        5px
+        10px
+        5px
+        5px;
 
     font-size:13px;
 
     font-weight:600;
+
+    color:#7A2929;
 }
 
 
 .modal-alergia-item img{
+
     width:30px;
 
     height:30px;
@@ -765,6 +941,7 @@ main{
 ===================================================== */
 
 #fecharModal{
+
     position:absolute;
 
     top:14px;
@@ -783,7 +960,8 @@ main{
 
     border-radius:50%;
 
-    background:rgba(0,0,0,.45);
+    background:
+        rgba(90,30,30,.55);
 
     font-size:30px;
 
@@ -803,9 +981,12 @@ main{
 
 
 #fecharModal:hover{
-    background:rgba(0,0,0,.7);
 
-    transform:scale(1.05);
+    background:
+        rgba(90,30,30,.8);
+
+    transform:
+        scale(1.05);
 }
 
 
@@ -816,6 +997,7 @@ main{
 @keyframes aparecer{
 
     from{
+
         opacity:0;
 
         transform:
@@ -824,6 +1006,7 @@ main{
     }
 
     to{
+
         opacity:1;
 
         transform:
@@ -839,9 +1022,10 @@ main{
 ===================================================== */
 
 footer{
+
     margin-top:50px;
 
-    background:#243A17;
+    background:#D95F59;
 
     color:white;
 
@@ -850,8 +1034,10 @@ footer{
     padding:26px;
 }
 
+
 footer p{
-    color:#E8C56A;
+
+    color:#FFE1C7;
 }
 
 
@@ -862,30 +1048,47 @@ footer p{
 @media(max-width:1000px){
 
     main{
+
         padding-left:20px;
+
         padding-right:20px;
     }
 
 
     .card{
-        grid-template-columns:85px minmax(0,1fr) 250px;
+
+        grid-template-columns:
+            115px
+            minmax(0,1fr)
+            270px;
     }
 
 
     .imagem{
-        width:68px;
-        height:68px;
+
+        width:95px;
+
+        height:95px;
 
         margin-left:14px;
     }
 
 
     .card .precos-tamanho{
-        width:250px;
 
-        gap:15px;
+        width:270px;
 
-        padding:0 10px;
+        gap:12px;
+
+        padding:
+            0
+            10px;
+    }
+
+
+    .card .preco-tamanho{
+
+        min-width:60px;
     }
 
 }
@@ -898,6 +1101,7 @@ footer p{
 @media(max-width:800px){
 
     header{
+
         flex-direction:column;
 
         justify-content:center;
@@ -906,13 +1110,16 @@ footer p{
 
         height:120px;
 
-        padding:10px 20px;
+        padding:
+            10px
+            20px;
 
         text-align:center;
     }
 
 
     .pesquisa input{
+
         width:100%;
 
         max-width:360px;
@@ -920,41 +1127,64 @@ footer p{
 
 
     .banner h2{
+
         font-size:42px;
     }
 
 
     .banner p{
+
         font-size:18px;
     }
 
 
     /*
-       No tablet, o preço fica abaixo
-       do texto para evitar apertar.
+       No tablet os preços descem
+       para uma linha própria.
     */
 
     .card{
-        grid-template-columns:80px minmax(0,1fr);
 
-        padding:4px 0;
+        grid-template-columns:
+            110px
+            minmax(0,1fr);
+
+        padding:
+            5px
+            0;
+    }
+
+
+    .imagem{
+
+        width:90px;
+
+        height:90px;
+
+        margin-left:12px;
     }
 
 
     .card .precos-tamanho{
+
         grid-column:2;
 
         width:auto;
 
         justify-content:flex-start;
 
-        padding:0 20px 14px 10px;
+        padding:
+            0
+            20px
+            15px
+            8px;
 
         gap:25px;
     }
 
 
     .card .alergias{
+
         margin-bottom:4px;
     }
 
@@ -968,6 +1198,7 @@ footer p{
 @media(max-width:600px){
 
     header{
+
         height:auto;
 
         padding:16px;
@@ -975,94 +1206,118 @@ footer p{
 
 
     .logo h1{
+
         font-size:34px;
     }
 
 
     .logo span{
+
         font-size:16px;
     }
 
 
     .pesquisa{
+
         width:100%;
     }
 
 
     .pesquisa input{
+
         width:100%;
+
         max-width:none;
     }
 
 
     .banner{
+
         min-height:220px;
     }
 
 
     .banner h2{
+
         font-size:34px;
     }
 
 
     .banner p{
+
         font-size:16px;
     }
 
 
     main{
-        padding:10px 12px 40px;
+
+        padding:
+            10px
+            10px
+            40px;
     }
 
 
     #listaPratos{
+
         border-radius:10px;
     }
 
 
-    /*
-       No celular, o prato vira uma
-       linha compacta de duas partes.
-    */
+    /* =============================================
+                    CARD MOBILE
+    ============================================== */
 
     .card{
-        grid-template-columns:72px minmax(0,1fr);
+
+        grid-template-columns:
+            88px
+            minmax(0,1fr);
 
         min-height:auto;
 
-        padding:10px 0;
+        padding:
+            10px
+            0;
     }
 
 
     .imagem{
-        width:58px;
-        height:58px;
 
-        margin-left:10px;
+        width:78px;
+
+        height:78px;
+
+        margin-left:8px;
 
         align-self:start;
 
         margin-top:8px;
+
+        border-radius:11px;
     }
 
 
     .conteudo{
+
         padding:
             10px
             10px
             10px
-            4px;
+            3px;
 
         gap:6px;
     }
 
 
     .card .nome{
+
         font-size:20px;
     }
 
 
     .card .descricao{
+
         font-size:13px;
 
         line-height:1.35;
@@ -1070,21 +1325,29 @@ footer p{
 
 
     .card .categoria{
+
         font-size:10px;
     }
 
 
     .card .rodape{
+
         margin-top:2px;
     }
 
 
     .card .preco{
+
         font-size:17px;
     }
 
 
+    /* =============================================
+                PREÇOS MOBILE
+    ============================================== */
+
     .card .precos-tamanho{
+
         grid-column:2;
 
         width:100%;
@@ -1093,49 +1356,64 @@ footer p{
             4px
             10px
             10px
-            4px;
+            3px;
 
         justify-content:flex-start;
 
-        gap:10px;
+        gap:12px;
     }
 
 
     .card .preco-tamanho{
-        min-width:55px;
+
+        min-width:58px;
 
         font-size:13px;
     }
 
 
+    /* =============================================
+                    ALERGIAS MOBILE
+    ============================================== */
+
     .card .alergias{
+
         font-size:10px;
     }
 
 
     .alergia-item{
+
         font-size:10px;
 
-        padding:2px 7px 2px 3px;
+        padding:
+            2px
+            7px
+            2px
+            3px;
     }
 
 
     .alergia-item img{
+
         width:20px;
+
         height:20px;
     }
 
 
-    /*
-       Modal no celular
-    */
+    /* =============================================
+                    MODAL MOBILE
+    ============================================== */
 
     .modal{
+
         padding:10px;
     }
 
 
     .modal-content{
+
         width:100%;
 
         max-height:94vh;
@@ -1145,11 +1423,13 @@ footer p{
 
 
     .modal-content img{
+
         height:220px;
     }
 
 
     .modal-content h2{
+
         font-size:27px;
 
         padding:
@@ -1160,13 +1440,17 @@ footer p{
 
 
     .modal-content p{
-        padding:0 20px;
+
+        padding:
+            0
+            20px;
 
         font-size:14px;
     }
 
 
     .modal-infos{
+
         padding:
             0
             20px
@@ -1175,11 +1459,13 @@ footer p{
 
 
     #modalPreco{
+
         font-size:23px;
     }
 
 
     #modalQuantidade{
+
         padding:
             0
             20px
@@ -1188,6 +1474,7 @@ footer p{
 
 
     #modalPrecosTamanho{
+
         margin:
             5px
             20px
@@ -1195,16 +1482,20 @@ footer p{
 
         gap:14px;
 
-        padding:14px 8px;
+        padding:
+            14px
+            8px;
     }
 
 
     .modal-preco-tamanho{
+
         font-size:13px;
     }
 
 
     .modal-alergias{
+
         margin:
             0
             20px
@@ -1215,7 +1506,9 @@ footer p{
 
 
     #fecharModal{
+
         width:38px;
+
         height:38px;
 
         font-size:27px;
@@ -1225,40 +1518,49 @@ footer p{
 
 
 /* =====================================================
-                    CELULARES MUITO PEQUENOS
+                CELULARES MUITO PEQUENOS
 ===================================================== */
 
 @media(max-width:400px){
 
     .card{
-        grid-template-columns:60px minmax(0,1fr);
+
+        grid-template-columns:
+            70px
+            minmax(0,1fr);
     }
 
 
     .imagem{
-        width:50px;
-        height:50px;
 
-        margin-left:7px;
+        width:62px;
+
+        height:62px;
+
+        margin-left:5px;
     }
 
 
     .card .nome{
+
         font-size:18px;
     }
 
 
     .card .descricao{
+
         font-size:12px;
     }
 
 
     .card .precos-tamanho{
+
         gap:5px;
     }
 
 
     .card .preco-tamanho{
+
         min-width:48px;
 
         font-size:12px;
@@ -1272,19 +1574,26 @@ footer p{
 ===================================================== */
 
 ::-webkit-scrollbar{
+
     width:10px;
 }
 
+
 ::-webkit-scrollbar-track{
-    background:#F8F4EC;
+
+    background:#FFF1ED;
 }
 
+
 ::-webkit-scrollbar-thumb{
-    background:#243A17;
+
+    background:#D95F59;
 
     border-radius:20px;
 }
 
+
 ::-webkit-scrollbar-thumb:hover{
-    background:#355120;
+
+    background:#B94343;
 }
