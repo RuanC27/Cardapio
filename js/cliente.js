@@ -1,3 +1,7 @@
+/* =====================================================
+                    CONFIGURAÇÕES
+===================================================== */
+
 const SUPABASE_URL =
     "https://fmwmgoxjmcvsmfbcpfsj.supabase.co";
 
@@ -5,9 +9,9 @@ const SUPABASE_KEY =
     "sb_publishable_ZJR2Z6gOfNO5rFhZb-RWwg_qvyY2b9Y";
 
 
-// =========================================
-// ELEMENTOS DA PÁGINA
-// =========================================
+/* =====================================================
+                    ELEMENTOS DA PÁGINA
+===================================================== */
 
 const listaPratos =
     document.getElementById("listaPratos");
@@ -22,9 +26,9 @@ const botoesCategoria =
     document.querySelectorAll(".categoria");
 
 
-// =========================================
-// ELEMENTOS DO MODAL
-// =========================================
+/* =====================================================
+                        MODAL
+===================================================== */
 
 const modal =
     document.getElementById("modal");
@@ -41,26 +45,64 @@ const modalNome =
 const modalDescricao =
     document.getElementById("modalDescricao");
 
+const modalQuantidade =
+    document.getElementById("modalQuantidade");
+
 const modalCategoria =
     document.getElementById("modalCategoria");
 
 const modalPreco =
     document.getElementById("modalPreco");
 
+const modalPrecosTamanho =
+    document.getElementById("modalPrecosTamanho");
+
+const modalPrecoPequeno =
+    document.getElementById("modalPrecoPequeno");
+
+const modalPrecoMedio =
+    document.getElementById("modalPrecoMedio");
+
+const modalPrecoGrande =
+    document.getElementById("modalPrecoGrande");
+
 const modalAlergias =
     document.getElementById("modalAlergias");
 
 
-// =========================================
-// VARIÁVEL DOS PRATOS
-// =========================================
+/* =====================================================
+                        ESTADO
+===================================================== */
 
 let pratos = [];
 
+let categoriaAtual = "Todos";
 
-// =========================================
-// FORMATAR PREÇO
-// =========================================
+
+/* =====================================================
+                    HEADERS SUPABASE
+===================================================== */
+
+function headers() {
+
+    return {
+
+        "apikey": SUPABASE_KEY,
+
+        "Authorization":
+            `Bearer ${SUPABASE_KEY}`,
+
+        "Content-Type":
+            "application/json"
+
+    };
+
+}
+
+
+/* =====================================================
+                    FORMATAR PREÇO
+===================================================== */
 
 function formatarPreco(valor) {
 
@@ -70,7 +112,7 @@ function formatarPreco(valor) {
         valor === ""
     ) {
 
-        return null;
+        return "";
 
     }
 
@@ -81,7 +123,7 @@ function formatarPreco(valor) {
 
     if (isNaN(numero)) {
 
-        return null;
+        return "";
 
     }
 
@@ -93,36 +135,58 @@ function formatarPreco(valor) {
 }
 
 
-// =========================================
-// BUSCAR PRATOS E ALERGIAS NO SUPABASE
-// =========================================
+/* =====================================================
+                    IMAGEM PADRÃO
+===================================================== */
+
+function imagemPadrao() {
+
+    return "imagens/sem-imagem.png";
+
+}
+
+
+/* =====================================================
+                CARREGAR PRATOS
+===================================================== */
 
 async function carregarPratos() {
+
+    listaPratos.innerHTML = `
+
+        <p class="carregando">
+
+            Carregando pratos...
+
+        </p>
+
+    `;
+
 
     try {
 
         console.log(
-            "Buscando pratos e alergias no Supabase..."
+            "Buscando pratos no Supabase..."
         );
 
 
-        // =========================================
-        // BUSCAR PRATOS
-        // =========================================
+        /* =========================================
+           BUSCAR PRATOS
+        ========================================= */
 
         const respostaPratos =
             await fetch(
-                `${SUPABASE_URL}/rest/v1/prato?select=*`,
+
+                `${SUPABASE_URL}/rest/v1/prato?select=*&order=id.asc`,
+
                 {
+
                     method: "GET",
 
-                    headers: {
-                        "apikey": SUPABASE_KEY,
+                    headers: headers()
 
-                        "Authorization":
-                            `Bearer ${SUPABASE_KEY}`
-                    }
                 }
+
             );
 
 
@@ -132,146 +196,134 @@ async function carregarPratos() {
                 await respostaPratos.text();
 
             throw new Error(
-                `Erro ao buscar pratos: ${respostaPratos.status}: ${erro}`
+                `Erro ao buscar pratos: ${erro}`
             );
 
         }
 
 
-        pratos =
+        const dadosPratos =
             await respostaPratos.json();
 
 
-        console.log(
-            "Pratos recebidos:",
-            pratos
-        );
+        /* =========================================
+           BUSCAR RELAÇÕES PRATO ↔ ALERGIA
+        ========================================= */
+
+        const respostaRelacoes =
+            await fetch(
+
+                `${SUPABASE_URL}/rest/v1/prato_alergia?select=prato_id,alergia_id`,
+
+                {
+
+                    method: "GET",
+
+                    headers: headers()
+
+                }
+
+            );
 
 
-        // =========================================
-        // BUSCAR RELAÇÕES PRATO -> ALERGIA
-        // =========================================
+        if (!respostaRelacoes.ok) {
 
-        let relacoes = [];
+            const erro =
+                await respostaRelacoes.text();
 
-        try {
-
-            const respostaRelacoes =
-                await fetch(
-                    `${SUPABASE_URL}/rest/v1/prato_alergia?select=prato_id,alergia_id`,
-                    {
-                        method: "GET",
-
-                        headers: {
-                            "apikey": SUPABASE_KEY,
-
-                            "Authorization":
-                                `Bearer ${SUPABASE_KEY}`
-                        }
-                    }
-                );
-
-
-            if (respostaRelacoes.ok) {
-
-                relacoes =
-                    await respostaRelacoes.json();
-
-            }
-            else {
-
-                console.warn(
-                    "Não foi possível carregar as relações prato_alergia."
-                );
-
-            }
-
-        }
-        catch (erro) {
-
-            console.warn(
-                "Erro ao buscar prato_alergia:",
-                erro
+            throw new Error(
+                `Erro ao buscar relações de alergias: ${erro}`
             );
 
         }
 
 
-        // =========================================
-        // BUSCAR ALERGIAS
-        // =========================================
-
-        let alergias = [];
-
-        try {
-
-            const respostaAlergias =
-                await fetch(
-                    `${SUPABASE_URL}/rest/v1/alergia?select=*`,
-                    {
-                        method: "GET",
-
-                        headers: {
-                            "apikey": SUPABASE_KEY,
-
-                            "Authorization":
-                                `Bearer ${SUPABASE_KEY}`
-                        }
-                    }
-                );
+        const relacoes =
+            await respostaRelacoes.json();
 
 
-            if (respostaAlergias.ok) {
+        /* =========================================
+           BUSCAR ALERGIAS
+        ========================================= */
 
-                alergias =
-                    await respostaAlergias.json();
+        const respostaAlergias =
+            await fetch(
 
-            }
-            else {
+                `${SUPABASE_URL}/rest/v1/alergia?select=id,nome,imagem&order=id.asc`,
 
-                console.warn(
-                    "Não foi possível carregar as alergias."
-                );
+                {
 
-            }
+                    method: "GET",
 
-        }
-        catch (erro) {
+                    headers: headers()
 
-            console.warn(
-                "Erro ao buscar alergias:",
-                erro
+                }
+
+            );
+
+
+        if (!respostaAlergias.ok) {
+
+            const erro =
+                await respostaAlergias.text();
+
+            throw new Error(
+                `Erro ao buscar alergias: ${erro}`
             );
 
         }
 
 
-        // =========================================
-        // MONTAR RELAÇÃO DAS ALERGIAS
-        // =========================================
+        const alergias =
+            await respostaAlergias.json();
+
+
+        /* =========================================
+           MONTAR MAPA DAS ALERGIAS
+        ========================================= */
+
+        const mapaAlergias =
+            new Map();
+
+
+        alergias.forEach(alergia => {
+
+            mapaAlergias.set(
+                String(alergia.id),
+                alergia
+            );
+
+        });
+
+
+        /* =========================================
+           ADICIONAR ALERGIAS A CADA PRATO
+        ========================================= */
 
         pratos =
-            pratos.map(prato => {
+            dadosPratos.map(prato => {
 
                 const relacoesDoPrato =
-                    relacoes.filter(
-                        relacao =>
-                            Number(relacao.prato_id) ===
-                            Number(prato.id)
-                    );
+                    relacoes.filter(relacao => {
+
+                        return String(
+                            relacao.prato_id
+                        ) === String(prato.id);
+
+                    });
 
 
                 const alergiasDoPrato =
                     relacoesDoPrato
+
                         .map(relacao => {
 
-                            return alergias.find(
-                                alergia =>
-                                    Number(alergia.id) ===
-                                    Number(relacao.alergia_id)
+                            return mapaAlergias.get(
+                                String(relacao.alergia_id)
                             );
 
                         })
+
                         .filter(Boolean);
 
 
@@ -288,12 +340,14 @@ async function carregarPratos() {
 
 
         console.log(
-            "Pratos com alergias:",
+            "Pratos recebidos:",
             pratos
         );
 
 
-        mostrarPratos(pratos);
+        mostrarPratos(
+            aplicarFiltros()
+        );
 
     }
 
@@ -301,7 +355,7 @@ async function carregarPratos() {
     catch (erro) {
 
         console.error(
-            "ERRO AO BUSCAR PRATOS:",
+            "ERRO AO BUSCAR DADOS:",
             erro
         );
 
@@ -310,7 +364,8 @@ async function carregarPratos() {
 
             <p class="erro">
 
-                Não foi possível carregar os pratos.
+                Não foi possível carregar
+                os pratos.
 
             </p>
 
@@ -321,22 +376,96 @@ async function carregarPratos() {
 }
 
 
-// =========================================
-// MOSTRAR PRATOS
-// =========================================
+/* =====================================================
+                    APLICAR FILTROS
+===================================================== */
+
+function aplicarFiltros() {
+
+    const texto =
+        pesquisa.value
+            .toLowerCase()
+            .trim();
+
+
+    return pratos.filter(prato => {
+
+
+        /* =========================================
+           FILTRO DE CATEGORIA
+        ========================================= */
+
+        const pertenceCategoria =
+
+            categoriaAtual === "Todos" ||
+
+            prato.categoria === categoriaAtual;
+
+
+        if (!pertenceCategoria) {
+
+            return false;
+
+        }
+
+
+        /* =========================================
+           FILTRO DE PESQUISA
+        ========================================= */
+
+        if (!texto) {
+
+            return true;
+
+        }
+
+
+        const nome =
+            (prato.nome || "")
+                .toLowerCase();
+
+
+        const descricao =
+            (prato.descricao || "")
+                .toLowerCase();
+
+
+        const categoria =
+            (prato.categoria || "")
+                .toLowerCase();
+
+
+        return (
+
+            nome.includes(texto) ||
+
+            descricao.includes(texto) ||
+
+            categoria.includes(texto)
+
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+                    MOSTRAR PRATOS
+===================================================== */
 
 function mostrarPratos(lista) {
 
     listaPratos.innerHTML = "";
 
 
-    if (lista.length === 0) {
+    if (!lista.length) {
 
         listaPratos.innerHTML = `
 
-            <p>
+            <p class="nenhum-prato">
 
-                Nenhum prato cadastrado.
+                Nenhum prato encontrado.
 
             </p>
 
@@ -349,6 +478,11 @@ function mostrarPratos(lista) {
 
     lista.forEach(prato => {
 
+
+        /* =========================================
+           CLONAR TEMPLATE
+        ========================================= */
+
         const card =
             template.content.cloneNode(true);
 
@@ -357,103 +491,78 @@ function mostrarPratos(lista) {
             card.querySelector(".card");
 
 
+        /* =========================================
+           ELEMENTOS DO CARD
+        ========================================= */
+
         const imagem =
             card.querySelector(".imagem img");
-
 
         const nome =
             card.querySelector(".nome");
 
-
         const descricao =
             card.querySelector(".descricao");
 
+        const quantidade =
+            card.querySelector(".quantidade");
 
         const categoria =
             card.querySelector(".categoria");
 
-
         const preco =
             card.querySelector(".preco");
 
+        const precoPequeno =
+            card.querySelector(".preco-pequeno");
 
-        const rodape =
-            card.querySelector(".rodape");
+        const precoMedio =
+            card.querySelector(".preco-medio");
 
+        const precoGrande =
+            card.querySelector(".preco-grande");
 
-        const quantidadeElemento =
-            card.querySelector(".quantidade");
+        const precosTamanho =
+            card.querySelector(".precos-tamanho");
 
-
-        const alergiasElemento =
+        const alergias =
             card.querySelector(".alergias");
 
 
-        // =========================================
-        // IMAGEM
-        // =========================================
+        /* =========================================
+           IMAGEM
+        ========================================= */
 
         imagem.src =
             prato.imagem ||
-            "imagens/sem-imagem.png";
-
+            imagemPadrao();
 
         imagem.alt =
             prato.nome ||
             "Prato";
 
 
-        // =========================================
-        // NOME
-        // =========================================
+        /* =========================================
+           NOME
+        ========================================= */
 
         nome.textContent =
             prato.nome ||
             "Sem nome";
 
 
-        // =========================================
-        // DESCRIÇÃO
-        // =========================================
+        /* =========================================
+           DESCRIÇÃO
+        ========================================= */
 
         descricao.textContent =
             prato.descricao ||
             "Sem descrição";
 
 
-        // =========================================
-        // CATEGORIA
-        // =========================================
-
-        categoria.textContent =
-            prato.categoria ||
-            "";
-
-
-        // =========================================
-        // PREÇO NORMAL
-        // =========================================
-
-        const precoFormatado =
-            formatarPreco(prato.preco);
-
-
-        if (precoFormatado !== null) {
-
-            preco.textContent =
-                precoFormatado;
-
-        }
-        else {
-
-            preco.textContent = "";
-
-        }
-
-
-        // =========================================
-        // QUANTIDADE
-        // =========================================
+        /* =========================================
+           QUANTIDADE
+        ========================================= */
 
         if (
             prato.quantidade !== null &&
@@ -461,550 +570,571 @@ function mostrarPratos(lista) {
             prato.quantidade !== ""
         ) {
 
-            quantidadeElemento.textContent =
-                `Quantidade: ${prato.quantidade}`;
+            quantidade.textContent =
+                `Quantidade disponível: ${prato.quantidade}`;
 
         }
+
         else {
 
-            quantidadeElemento.textContent = "";
+            quantidade.textContent = "";
 
         }
 
 
-        // =========================================
-        // PREÇOS POR TAMANHO
-        // =========================================
+        /* =========================================
+           CATEGORIA
+        ========================================= */
 
-        const tamanhos = [];
+        categoria.textContent =
+            prato.categoria ||
+            "";
 
 
-        const precoPequeno =
+        /* =========================================
+           PREÇO PRINCIPAL
+        ========================================= */
+
+        preco.textContent =
             formatarPreco(
-                prato.preco_pequeno
+                prato.preco
             );
 
 
-        const precoMedio =
-            formatarPreco(
-                prato.preco_medio
-            );
+        /* =========================================
+           PREÇOS POR TAMANHO
+        ========================================= */
+
+        const temPrecoPequeno =
+            prato.preco_pequeno !== null &&
+            prato.preco_pequeno !== undefined &&
+            prato.preco_pequeno !== "";
 
 
-        const precoGrande =
-            formatarPreco(
-                prato.preco_grande
-            );
+        const temPrecoMedio =
+            prato.preco_medio !== null &&
+            prato.preco_medio !== undefined &&
+            prato.preco_medio !== "";
 
 
-        if (precoPequeno !== null) {
-
-            tamanhos.push({
-
-                tamanho: "Pequeno",
-
-                preco:
-                    precoPequeno
-
-            });
-
-        }
+        const temPrecoGrande =
+            prato.preco_grande !== null &&
+            prato.preco_grande !== undefined &&
+            prato.preco_grande !== "";
 
 
-        if (precoMedio !== null) {
-
-            tamanhos.push({
-
-                tamanho: "Médio",
-
-                preco:
-                    precoMedio
-
-            });
-
-        }
+        const possuiPrecosTamanho =
+            temPrecoPequeno ||
+            temPrecoMedio ||
+            temPrecoGrande;
 
 
-        if (precoGrande !== null) {
+        if (!possuiPrecosTamanho) {
 
-            tamanhos.push({
-
-                tamanho: "Grande",
-
-                preco:
-                    precoGrande
-
-            });
-
-        }
-
-
-        // =========================================
-        // MOSTRAR PREÇOS POR TAMANHO NO CARD
-        // =========================================
-
-        const containerTamanhos =
-            card.querySelector(".precos-tamanho");
-
-
-        if (tamanhos.length > 0) {
-
-            containerTamanhos.innerHTML = "";
-
-
-            tamanhos.forEach(item => {
-
-                const tamanho =
-                    document.createElement("span");
-
-
-                tamanho.className =
-                    "preco-tamanho";
-
-
-                tamanho.textContent =
-                    `${item.tamanho}: ${item.preco}`;
-
-
-                containerTamanhos.appendChild(
-                    tamanho
-                );
-
-            });
-
-        }
-        else {
-
-            containerTamanhos.style.display =
+            precosTamanho.style.display =
                 "none";
 
         }
 
-
-        // =========================================
-        // ALERGIAS NO CARD
-        // =========================================
-
-        if (
-            prato.alergias &&
-            prato.alergias.length > 0
-        ) {
-
-            alergiasElemento.innerHTML = "";
-
-
-            const titulo =
-                document.createElement("strong");
-
-
-            titulo.textContent =
-                "⚠️ Alergias:";
-
-
-            alergiasElemento.appendChild(
-                titulo
-            );
-
-
-            const listaAlergias =
-                document.createElement("div");
-
-
-            listaAlergias.className =
-                "alergias-lista";
-
-
-            prato.alergias.forEach(alergia => {
-
-                const item =
-                    document.createElement("div");
-
-
-                item.className =
-                    "alergia-item";
-
-
-                const imagemAlergia =
-                    document.createElement("img");
-
-
-                imagemAlergia.src =
-                    alergia.imagem ||
-                    "https://via.placeholder.com/60?text=Alergia";
-
-
-                imagemAlergia.alt =
-                    alergia.nome ||
-                    "Alergia";
-
-
-                const nomeAlergia =
-                    document.createElement("span");
-
-
-                nomeAlergia.textContent =
-                    alergia.nome ||
-                    "Sem nome";
-
-
-                item.appendChild(
-                    imagemAlergia
-                );
-
-
-                item.appendChild(
-                    nomeAlergia
-                );
-
-
-                listaAlergias.appendChild(
-                    item
-                );
-
-            });
-
-
-            alergiasElemento.appendChild(
-                listaAlergias
-            );
-
-        }
         else {
 
-            alergiasElemento.innerHTML = "";
+            precosTamanho.style.display =
+                "flex";
 
-        }
 
+            if (temPrecoPequeno) {
 
-        // =========================================
-        // ABRIR MODAL
-        // =========================================
+                precoPequeno.innerHTML = `
 
-        elementoCard.addEventListener(
-            "click",
+                    <strong>P</strong>
 
-            () => {
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_pequeno
+                        )}
+                    </span>
 
-                // =========================================
-                // IMAGEM
-                // =========================================
-
-                modalImagem.src =
-                    prato.imagem ||
-                    "imagens/sem-imagem.png";
-
-
-                // =========================================
-                // NOME
-                // =========================================
-
-                modalNome.textContent =
-                    prato.nome ||
-                    "";
-
-
-                // =========================================
-                // DESCRIÇÃO
-                // =========================================
-
-                modalDescricao.textContent =
-                    prato.descricao ||
-                    "";
-
-
-                // =========================================
-                // CATEGORIA
-                // =========================================
-
-                modalCategoria.textContent =
-                    prato.categoria ||
-                    "";
-
-
-                // =========================================
-                // LIMPAR PREÇO
-                // =========================================
-
-                modalPreco.innerHTML =
-                    "";
-
-
-                // =========================================
-                // PREÇO NORMAL NO MODAL
-                // =========================================
-
-                if (
-                    precoFormatado !== null
-                ) {
-
-                    const precoNormal =
-                        document.createElement("span");
-
-
-                    precoNormal.className =
-                        "modal-preco-normal";
-
-
-                    precoNormal.textContent =
-                        precoFormatado;
-
-
-                    modalPreco.appendChild(
-                        precoNormal
-                    );
-
-                }
-
-
-                // =========================================
-                // QUANTIDADE NO MODAL
-                // =========================================
-
-                const modalQuantidade =
-                    document.getElementById(
-                        "modalQuantidade"
-                    );
-
-
-                modalQuantidade.innerHTML =
-                    "";
-
-
-                if (
-                    prato.quantidade !== null &&
-                    prato.quantidade !== undefined &&
-                    prato.quantidade !== ""
-                ) {
-
-                    const quantidadeModal =
-                        document.createElement("span");
-
-
-                    quantidadeModal.className =
-                        "modal-quantidade";
-
-
-                    quantidadeModal.textContent =
-                        `Quantidade: ${prato.quantidade}`;
-
-
-                    modalQuantidade.appendChild(
-                        quantidadeModal
-                    );
-
-                }
-
-
-                // =========================================
-                // PREÇOS POR TAMANHO NO MODAL
-                // =========================================
-
-                const modalPrecosTamanho =
-                    document.getElementById(
-                        "modalPrecosTamanho"
-                    );
-
-
-                modalPrecosTamanho.innerHTML =
-                    "";
-
-
-                if (
-                    tamanhos.length > 0
-                ) {
-
-                    tamanhos.forEach(item => {
-
-                        const tamanho =
-                            document.createElement("span");
-
-
-                        tamanho.className =
-                            "modal-preco-tamanho";
-
-
-                        tamanho.textContent =
-                            `${item.tamanho}: ${item.preco}`;
-
-
-                        modalPrecosTamanho.appendChild(
-                            tamanho
-                        );
-
-                    });
-
-                }
-
-
-                // =========================================
-                // ALERGIAS NO MODAL
-                // =========================================
-
-                modalAlergias.innerHTML =
-                    "";
-
-
-                if (
-                    prato.alergias &&
-                    prato.alergias.length > 0
-                ) {
-
-                    const titulo =
-                        document.createElement("strong");
-
-
-                    titulo.textContent =
-                        "⚠️ Alergias deste prato";
-
-
-                    modalAlergias.appendChild(
-                        titulo
-                    );
-
-
-                    const listaAlergiasModal =
-                        document.createElement("div");
-
-
-                    listaAlergiasModal.className =
-                        "modal-alergias-lista";
-
-
-                    prato.alergias.forEach(alergia => {
-
-                        const item =
-                            document.createElement("div");
-
-
-                        item.className =
-                            "modal-alergia-item";
-
-
-                        const imagemAlergia =
-                            document.createElement("img");
-
-
-                        imagemAlergia.src =
-                            alergia.imagem ||
-                            "https://via.placeholder.com/60?text=Alergia";
-
-
-                        imagemAlergia.alt =
-                            alergia.nome ||
-                            "Alergia";
-
-
-                        const nomeAlergia =
-                            document.createElement("span");
-
-
-                        nomeAlergia.textContent =
-                            alergia.nome ||
-                            "Sem nome";
-
-
-                        item.appendChild(
-                            imagemAlergia
-                        );
-
-
-                        item.appendChild(
-                            nomeAlergia
-                        );
-
-
-                        listaAlergiasModal.appendChild(
-                            item
-                        );
-
-                    });
-
-
-                    modalAlergias.appendChild(
-                        listaAlergiasModal
-                    );
-
-                }
-
-
-                // =========================================
-                // MOSTRAR MODAL
-                // =========================================
-
-                modal.style.display =
-                    "flex";
+                `;
 
             }
 
+            else {
+
+                precoPequeno.style.display =
+                    "none";
+
+            }
+
+
+            if (temPrecoMedio) {
+
+                precoMedio.innerHTML = `
+
+                    <strong>M</strong>
+
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_medio
+                        )}
+                    </span>
+
+                `;
+
+            }
+
+            else {
+
+                precoMedio.style.display =
+                    "none";
+
+            }
+
+
+            if (temPrecoGrande) {
+
+                precoGrande.innerHTML = `
+
+                    <strong>G</strong>
+
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_grande
+                        )}
+                    </span>
+
+                `;
+
+            }
+
+            else {
+
+                precoGrande.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =========================================
+           ALERGIAS
+        ========================================= */
+
+        montarAlergiasCard(
+            alergias,
+            prato,
+            alergias
         );
 
 
-        // =========================================
-        // ADICIONAR CARD À LISTA
-        // =========================================
+        /* =========================================
+           ABRIR MODAL
+        ========================================= */
 
-        listaPratos.appendChild(
-            card
+        elementoCard.addEventListener(
+            "click",
+            () => {
+
+                abrirModal(prato);
+
+            }
         );
+
+
+        /* =========================================
+           ADICIONAR CARD
+        ========================================= */
+
+        listaPratos.appendChild(card);
 
     });
 
 }
 
 
-// =========================================
-// PESQUISA
-// =========================================
+/* =====================================================
+                MONTAR ALERGIAS DO CARD
+===================================================== */
+
+function montarAlergiasCard(
+    containerAlergias,
+    prato,
+    listaAlergias
+) {
+
+    if (
+        !listaAlergias ||
+        !listaAlergias.length
+    ) {
+
+        containerAlergias.innerHTML = "";
+
+        return;
+
+    }
+
+
+    containerAlergias.innerHTML = `
+
+        <strong>
+            ⚠ Alergias:
+        </strong>
+
+        <div class="alergias-lista"></div>
+
+    `;
+
+
+    const lista =
+        containerAlergias.querySelector(
+            ".alergias-lista"
+        );
+
+
+    listaAlergias.forEach(alergia => {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "alergia-item";
+
+
+        const imagem =
+            document.createElement("img");
+
+
+        imagem.src =
+            alergia.imagem ||
+            imagemPadrao();
+
+
+        imagem.alt =
+            alergia.nome ||
+            "Alergia";
+
+
+        const nome =
+            document.createElement("span");
+
+
+        nome.textContent =
+            alergia.nome ||
+            "Alergia";
+
+
+        item.appendChild(imagem);
+
+        item.appendChild(nome);
+
+        lista.appendChild(item);
+
+    });
+
+}
+
+
+/* =====================================================
+                    ABRIR MODAL
+===================================================== */
+
+function abrirModal(prato) {
+
+
+    /* =========================================
+       IMAGEM
+    ========================================= */
+
+    modalImagem.src =
+        prato.imagem ||
+        imagemPadrao();
+
+
+    modalImagem.alt =
+        prato.nome ||
+        "Prato";
+
+
+    /* =========================================
+       NOME
+    ========================================= */
+
+    modalNome.textContent =
+        prato.nome ||
+        "";
+
+
+    /* =========================================
+       DESCRIÇÃO
+    ========================================= */
+
+    modalDescricao.textContent =
+        prato.descricao ||
+        "";
+
+
+    /* =========================================
+       QUANTIDADE
+    ========================================= */
+
+    if (
+        prato.quantidade !== null &&
+        prato.quantidade !== undefined &&
+        prato.quantidade !== ""
+    ) {
+
+        modalQuantidade.textContent =
+            `Quantidade disponível: ${prato.quantidade}`;
+
+    }
+
+    else {
+
+        modalQuantidade.textContent =
+            "";
+
+    }
+
+
+    /* =========================================
+       CATEGORIA
+    ========================================= */
+
+    modalCategoria.textContent =
+        prato.categoria ||
+        "";
+
+
+    /* =========================================
+       PREÇO PRINCIPAL
+    ========================================= */
+
+    modalPreco.textContent =
+        formatarPreco(
+            prato.preco
+        );
+
+
+    /* =========================================
+       PREÇOS POR TAMANHO
+    ========================================= */
+
+    const temPrecoPequeno =
+        prato.preco_pequeno !== null &&
+        prato.preco_pequeno !== undefined &&
+        prato.preco_pequeno !== "";
+
+
+    const temPrecoMedio =
+        prato.preco_medio !== null &&
+        prato.preco_medio !== undefined &&
+        prato.preco_medio !== "";
+
+
+    const temPrecoGrande =
+        prato.preco_grande !== null &&
+        prato.preco_grande !== undefined &&
+        prato.preco_grande !== "";
+
+
+    const possuiPrecos =
+        temPrecoPequeno ||
+        temPrecoMedio ||
+        temPrecoGrande;
+
+
+    if (!possuiPrecos) {
+
+        modalPrecosTamanho.style.display =
+            "none";
+
+    }
+
+    else {
+
+        modalPrecosTamanho.style.display =
+            "flex";
+
+
+        modalPrecoPequeno.innerHTML =
+            temPrecoPequeno
+
+                ? `
+                    <strong>P</strong>
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_pequeno
+                        )}
+                    </span>
+                  `
+
+                : "";
+
+
+        modalPrecoMedio.innerHTML =
+            temPrecoMedio
+
+                ? `
+                    <strong>M</strong>
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_medio
+                        )}
+                    </span>
+                  `
+
+                : "";
+
+
+        modalPrecoGrande.innerHTML =
+            temPrecoGrande
+
+                ? `
+                    <strong>G</strong>
+                    <span>
+                        ${formatarPreco(
+                            prato.preco_grande
+                        )}
+                    </span>
+                  `
+
+                : "";
+
+    }
+
+
+    /* =========================================
+       ALERGIAS
+    ========================================= */
+
+    montarAlergiasModal(
+        prato.alergias || []
+    );
+
+
+    /* =========================================
+       ABRIR
+    ========================================= */
+
+    modal.classList.add(
+        "ativo"
+    );
+
+
+    /*
+       Compatibilidade caso algum
+       CSS antigo esteja usando display.
+    */
+
+    modal.style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+                MONTAR ALERGIAS DO MODAL
+===================================================== */
+
+function montarAlergiasModal(
+    listaAlergias
+) {
+
+    modalAlergias.innerHTML =
+        "";
+
+
+    if (
+        !listaAlergias ||
+        !listaAlergias.length
+    ) {
+
+        return;
+
+    }
+
+
+    const titulo =
+        document.createElement("strong");
+
+
+    titulo.textContent =
+        "⚠ Alergias presentes";
+
+
+    modalAlergias.appendChild(
+        titulo
+    );
+
+
+    const lista =
+        document.createElement("div");
+
+
+    lista.className =
+        "modal-alergias-lista";
+
+
+    listaAlergias.forEach(alergia => {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "modal-alergia-item";
+
+
+        const imagem =
+            document.createElement("img");
+
+
+        imagem.src =
+            alergia.imagem ||
+            imagemPadrao();
+
+
+        imagem.alt =
+            alergia.nome ||
+            "Alergia";
+
+
+        const nome =
+            document.createElement("span");
+
+
+        nome.textContent =
+            alergia.nome ||
+            "Alergia";
+
+
+        item.appendChild(imagem);
+
+        item.appendChild(nome);
+
+        lista.appendChild(item);
+
+    });
+
+
+    modalAlergias.appendChild(
+        lista
+    );
+
+}
+
+
+/* =====================================================
+                    PESQUISA
+===================================================== */
 
 pesquisa.addEventListener(
     "input",
-
     () => {
 
-        const texto =
-            pesquisa.value
-                .toLowerCase()
-                .trim();
-
-
         const resultado =
-            pratos.filter(prato => {
-
-                const nome =
-                    (
-                        prato.nome ||
-                        ""
-                    )
-                        .toLowerCase();
-
-
-                const descricao =
-                    (
-                        prato.descricao ||
-                        ""
-                    )
-                        .toLowerCase();
-
-
-                const categoria =
-                    (
-                        prato.categoria ||
-                        ""
-                    )
-                        .toLowerCase();
-
-
-                return (
-
-                    nome.includes(texto) ||
-
-                    descricao.includes(texto) ||
-
-                    categoria.includes(texto)
-
-                );
-
-            });
+            aplicarFiltros();
 
 
         mostrarPratos(
@@ -1012,115 +1142,141 @@ pesquisa.addEventListener(
         );
 
     }
-
 );
 
 
-// =========================================
-// FILTRO POR CATEGORIA
-// =========================================
+/* =====================================================
+                FILTRO POR CATEGORIA
+===================================================== */
 
-botoesCategoria.forEach(botao => {
+botoesCategoria.forEach(
+    botao => {
 
-    botao.addEventListener(
-        "click",
-
-        () => {
-
-            botoesCategoria.forEach(b =>
-                b.classList.remove("ativa")
-            );
+        botao.addEventListener(
+            "click",
+            () => {
 
 
-            botao.classList.add(
-                "ativa"
-            );
+                /* =================================
+                   REMOVER ATIVAÇÃO
+                ================================= */
 
+                botoesCategoria.forEach(
+                    outroBotao => {
 
-            const categoriaSelecionada =
-                botao.dataset.categoria;
+                        outroBotao.classList.remove(
+                            "ativa"
+                        );
 
-
-            if (
-                categoriaSelecionada ===
-                "Todos"
-            ) {
-
-                mostrarPratos(
-                    pratos
+                    }
                 );
 
-                return;
+
+                /* =================================
+                   ATIVAR BOTÃO
+                ================================= */
+
+                botao.classList.add(
+                    "ativa"
+                );
+
+
+                /* =================================
+                   ATUALIZAR CATEGORIA
+                ================================= */
+
+                categoriaAtual =
+                    botao.dataset.categoria;
+
+
+                /* =================================
+                   MOSTRAR RESULTADO
+                ================================= */
+
+                mostrarPratos(
+                    aplicarFiltros()
+                );
 
             }
+        );
+
+    }
+);
 
 
-            const resultado =
-                pratos.filter(prato => {
-
-                    return (
-
-                        prato.categoria ===
-                        categoriaSelecionada
-
-                    );
-
-                });
-
-
-            mostrarPratos(
-                resultado
-            );
-
-        }
-
-    );
-
-});
-
-
-// =========================================
-// FECHAR MODAL
-// =========================================
+/* =====================================================
+                    FECHAR MODAL
+===================================================== */
 
 fecharModal.addEventListener(
     "click",
-
     () => {
 
-        modal.style.display =
-            "none";
+        fecharModalPrato();
 
     }
-
 );
 
 
-// =========================================
-// FECHAR CLICANDO FORA DO MODAL
-// =========================================
+/* =====================================================
+                FECHAR MODAL
+                CLICANDO FORA
+===================================================== */
 
 modal.addEventListener(
     "click",
-
     evento => {
 
         if (
             evento.target === modal
         ) {
 
-            modal.style.display =
-                "none";
+            fecharModalPrato();
 
         }
 
     }
-
 );
 
 
-// =========================================
-// INICIAR
-// =========================================
+/* =====================================================
+                FECHAR COM ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    evento => {
+
+        if (
+            evento.key === "Escape"
+        ) {
+
+            fecharModalPrato();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+                    FECHAR MODAL
+===================================================== */
+
+function fecharModalPrato() {
+
+    modal.classList.remove(
+        "ativo"
+    );
+
+    modal.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+                    INICIAR
+===================================================== */
 
 carregarPratos();
