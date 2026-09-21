@@ -2,10 +2,10 @@
                     CONFIGURAÇÕES GERAIS
 ===================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
     font-family:
         'Segoe UI',
@@ -15,12 +15,10 @@
         sans-serif;
 }
 
-body{
-    background:#FFF8F2;
-
-    color:#3A2929;
-
-    min-height:100vh;
+body {
+    background: #FFF7F3;
+    color: #3A2927;
+    min-height: 100vh;
 }
 
 
@@ -28,76 +26,110 @@ body{
                         HEADER
 ===================================================== */
 
-header{
-    height:90px;
+header {
+    min-height: 100px;
 
-    background:#D95F59;
+    background: #E56B63;
 
-    color:white;
+    color: white;
 
-    display:flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    justify-content:space-between;
+    gap: 30px;
 
-    align-items:center;
-
-    padding:0 50px;
-
-    box-shadow:
-        0 3px 15px rgba(100,30,30,.18);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:100;
-}
-
-
-.logo h1{
-    font-size:42px;
-
-    font-weight:800;
-
-    letter-spacing:-1px;
-}
-
-
-.logo span{
-    color:#FFE1C7;
-
-    font-size:18px;
-
-    font-weight:500;
-}
-
-
-.pesquisa input{
-    width:320px;
-
-    height:48px;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:0 18px;
-
-    font-size:16px;
-
-    outline:none;
-
-    background:white;
-
-    color:#4A2929;
+    padding: 12px 35px 12px 50px;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,.08);
+        0 4px 18px rgba(130, 45, 40, 0.20);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
 }
 
 
-.pesquisa input::placeholder{
-    color:#9B7777;
+/* =====================================================
+                    IDENTIDADE
+===================================================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+}
+
+.logo span {
+    color: #FFF1E9;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: .3px;
+}
+
+
+/* =====================================================
+                    LOGO RESTAURANTE
+===================================================== */
+
+.logo-restaurante {
+    width: 190px;
+    height: 76px;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+                        PESQUISA
+===================================================== */
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+}
+
+.pesquisa input {
+    width: 330px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 0 18px;
+
+    background: white;
+
+    color: #3A2927;
+
+    font-size: 16px;
+
+    outline: none;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, .10);
+
+    transition: .25s;
+}
+
+.pesquisa input:focus {
+    box-shadow:
+        0 0 0 3px rgba(255, 225, 210, .8),
+        0 4px 15px rgba(0, 0, 0, .12);
+}
+
+.pesquisa input::placeholder {
+    color: #9A8580;
 }
 
 
@@ -105,50 +137,52 @@ header{
                         BANNER
 ===================================================== */
 
-.banner{
-
+.banner {
     background:
         linear-gradient(
-            rgba(122,41,41,.72),
-            rgba(217,95,89,.72)
+            rgba(197, 78, 70, .72),
+            rgba(197, 78, 70, .72)
         ),
         url('../imagens/banner.jpg')
-        center/cover no-repeat;
+        center / cover
+        no-repeat;
 
-    min-height:280px;
+    min-height: 310px;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:center;
+    text-align: center;
 
-    text-align:center;
-
-    padding:40px 20px;
+    padding: 50px 20px;
 }
 
+.banner .texto {
+    max-width: 760px;
 
-.banner .texto{
-    max-width:750px;
-
-    color:white;
+    color: white;
 }
 
+.banner h2 {
+    font-size: 58px;
 
-.banner h2{
-    font-size:56px;
+    margin-bottom: 16px;
 
-    margin-bottom:16px;
+    font-weight: 800;
 
-    font-weight:800;
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .20);
 }
 
+.banner p {
+    font-size: 20px;
 
-.banner p{
-    font-size:20px;
+    line-height: 1.6;
 
-    line-height:1.6;
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, .20);
 }
 
 
@@ -156,65 +190,57 @@ header{
                     CATEGORIAS
 ===================================================== */
 
-.categorias{
+.categorias {
+    display: flex;
 
-    display:flex;
+    justify-content: center;
 
-    justify-content:center;
+    gap: 12px;
 
-    gap:12px;
+    flex-wrap: wrap;
 
-    flex-wrap:wrap;
-
-    padding:28px 20px;
+    padding: 28px 20px 24px;
 }
 
+.categoria {
+    border: none;
 
-.categoria{
+    background: white;
 
-    border:none;
+    color: #C6534C;
 
-    background:white;
+    padding: 12px 22px;
 
-    color:#7A2929;
+    border-radius: 999px;
 
-    padding:12px 22px;
+    font-size: 15px;
 
-    border-radius:999px;
+    font-weight: 700;
 
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
+    cursor: pointer;
 
     box-shadow:
-        0 3px 10px rgba(120,40,40,.08);
+        0 4px 12px rgba(100, 40, 30, .09);
 
-    transition:
-        .25s;
+    transition: .25s;
 }
 
+.categoria:hover {
+    background: #FFE2D9;
 
-.categoria:hover{
-
-    background:#FCE8E5;
-
-    color:#7A2929;
-
-    transform:
-        translateY(-2px);
-}
-
-
-.categoria.ativa{
-
-    background:#D95F59;
-
-    color:white;
+    transform: translateY(-2px);
 
     box-shadow:
-        0 5px 14px rgba(217,95,89,.30);
+        0 6px 15px rgba(100, 40, 30, .12);
+}
+
+.categoria.ativa {
+    background: #E56B63;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px rgba(180, 65, 58, .25);
 }
 
 
@@ -222,42 +248,34 @@ header{
                     CONTEÚDO PRINCIPAL
 ===================================================== */
 
-main{
+main {
+    max-width: 1500px;
 
-    max-width:1250px;
-
-    margin:0 auto;
+    margin: 0 auto;
 
     padding:
-        10px
+        12px
         30px
         60px;
 }
 
 
 /* =====================================================
-                    LISTA DE PRATOS
+                    GRID DE PRATOS
 ===================================================== */
 
-#listaPratos{
+#listaPratos {
+    display: grid;
 
-    display:flex;
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(330px, 1fr)
+        );
 
-    flex-direction:column;
+    gap: 32px;
 
-    gap:0;
-
-    background:white;
-
-    border:
-        1px solid #EBCBC5;
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 6px 25px rgba(100,40,40,.08);
+    align-items: stretch;
 }
 
 
@@ -265,54 +283,34 @@ main{
                         CARD
 ===================================================== */
 
-.card{
+.card {
+    background: white;
 
-    background:white;
+    border-radius: 22px;
 
-    border:none;
-
-    border-bottom:
-        1px solid #E8D6D0;
-
-    border-radius:0;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    display:grid;
-
-    grid-template-columns:
-        125px
-        minmax(0,1fr)
-        320px;
-
-    align-items:center;
-
-    min-height:165px;
-
-    position:relative;
-
-    transition:
-        background .2s ease,
-        box-shadow .2s ease;
-}
-
-
-.card:last-child{
-
-    border-bottom:none;
-}
-
-
-.card:hover{
-
-    transform:none;
-
-    background:#FFFDFC;
+    overflow: hidden;
 
     box-shadow:
-        inset 6px 0 0 #D95F59;
+        0 8px 25px rgba(100, 45, 35, .09);
+
+    transition:
+        transform .3s,
+        box-shadow .3s;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(100, 45, 35, .16);
 }
 
 
@@ -320,87 +318,62 @@ main{
                     IMAGEM DO PRATO
 ===================================================== */
 
-.imagem{
+.imagem {
+    width: 100%;
 
-    width:105px;
+    height: 285px;
 
-    height:105px;
+    overflow: hidden;
 
-    margin-left:18px;
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    flex-shrink:0;
-
-    border:
-        3px solid #F3C2BD;
-
-    background:#FCE8E5;
-
-    box-shadow:
-        0 4px 12px rgba(120,40,40,.12);
+    background: #F4DDD7;
 }
 
+.imagem img {
+    width: 100%;
+    height: 100%;
 
-.imagem img{
+    object-fit: cover;
 
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
+    display: block;
 
     transition:
-        transform .35s ease;
+        transform .4s;
 }
 
-
-.card:hover .imagem img{
-
-    transform:
-        scale(1.07);
-}
-
-
-/* =====================================================
-                    CONTEÚDO DO PRATO
-===================================================== */
-
-.conteudo{
-
-    min-width:0;
-
-    padding:
-        22px
-        20px
-        22px
-        8px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
+.card:hover .imagem img {
+    transform: scale(1.06);
 }
 
 
 /* =====================================================
-                    NOME DO PRATO
+                    CONTEÚDO DO CARD
 ===================================================== */
 
-.card .nome{
+.conteudo {
+    padding: 22px;
 
-    font-size:26px;
+    display: flex;
 
-    line-height:1.15;
+    flex-direction: column;
 
-    color:#7A2929;
+    gap: 11px;
 
-    font-weight:800;
+    flex: 1;
+}
 
-    margin:0;
+
+/* =====================================================
+                        NOME
+===================================================== */
+
+.nome {
+    font-size: 25px;
+
+    color: #C6534C;
+
+    font-weight: 800;
+
+    line-height: 1.2;
 }
 
 
@@ -408,19 +381,27 @@ main{
                     DESCRIÇÃO
 ===================================================== */
 
-.card .descricao{
+.descricao {
+    color: #6F5D59;
 
-    color:#684F4F;
+    line-height: 1.55;
 
-    line-height:1.4;
+    min-height: 48px;
 
-    font-size:15px;
+    font-size: 15px;
+}
 
-    min-height:auto;
 
-    margin:0;
+/* =====================================================
+                    QUANTIDADE
+===================================================== */
 
-    max-width:720px;
+.quantidade {
+    color: #8B716B;
+
+    font-size: 13px;
+
+    font-weight: 600;
 }
 
 
@@ -428,206 +409,176 @@ main{
                     CATEGORIA
 ===================================================== */
 
-.card .categoria{
+.conteudo > .categoria {
+    align-self: flex-start;
 
-    align-self:flex-start;
+    background: #FFE3DB;
 
-    background:transparent;
+    color: #C6534C;
 
-    color:#B85A54;
+    padding: 6px 13px;
 
-    padding:0;
+    border-radius: 999px;
 
-    border-radius:0;
+    font-size: 12px;
 
-    font-size:11px;
+    font-weight: 800;
 
-    font-weight:800;
+    box-shadow: none;
 
-    box-shadow:none;
+    cursor: default;
 
-    text-transform:uppercase;
+    transform: none;
+}
 
-    letter-spacing:.7px;
+.conteudo > .categoria:hover {
+    background: #FFE3DB;
 
-    cursor:default;
+    transform: none;
+
+    box-shadow: none;
 }
 
 
 /* =====================================================
-                    RODAPÉ DO CARD
+                        RODAPÉ
 ===================================================== */
 
-.rodape{
+.rodape {
+    margin-top: auto;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    justify-content: flex-end;
 
-    justify-content:flex-start;
+    align-items: center;
 
-    margin-top:3px;
+    padding-top: 8px;
+}
 
-    gap:12px;
+.preco {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #C6534C;
 }
 
 
 /* =====================================================
-                    PREÇO NORMAL
+                    PREÇOS POR TAMANHO
 ===================================================== */
 
-.preco{
+.precos-tamanho {
+    display: flex;
 
-    font-size:21px;
+    align-items: center;
 
-    font-weight:800;
+    gap: 8px;
 
-    color:#D95F59;
+    flex-wrap: wrap;
+
+    margin-top: 3px;
 }
 
+.preco-tamanho,
+.preco-pequeno,
+.preco-medio,
+.preco-grande {
+    display: flex;
 
-.card .rodape .preco:empty{
+    align-items: center;
 
-    display:none;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    background: #FFF0EB;
+
+    color: #B84D47;
+
+    border: 1px solid #F4D1C9;
+
+    border-radius: 10px;
+
+    padding: 7px 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.preco-tamanho strong,
+.preco-pequeno strong,
+.preco-medio strong,
+.preco-grande strong {
+    color: #C6534C;
+
+    font-size: 14px;
 }
 
 
 /* =====================================================
-                PREÇOS POR TAMANHO
+                    ALERGIAS DO CARD
 ===================================================== */
 
-.card .precos-tamanho{
+.alergias {
+    margin-top: 6px;
 
-    display:flex;
+    padding-top: 12px;
 
-    align-items:center;
-
-    justify-content:center;
-
-    gap:22px;
-
-    width:320px;
-
-    padding:
-        0
-        18px;
+    border-top:
+        1px solid #F1E1DC;
 }
 
+.alergias > strong {
+    display: block;
 
-.card .preco-tamanho{
+    color: #B84D47;
 
-    display:flex;
+    font-size: 13px;
 
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    min-width:70px;
-
-    color:#D95F59;
-
-    font-size:16px;
-
-    font-weight:800;
-
-    line-height:1.35;
-
-    text-align:center;
+    margin-bottom: 9px;
 }
 
+.alergias-lista {
+    display: flex;
 
-/* =====================================================
-                DESTAQUE DOS PREÇOS
-===================================================== */
+    flex-wrap: wrap;
 
-.card .preco-tamanho::first-letter{
-
-    color:#7A2929;
+    gap: 8px;
 }
 
+.alergia-item {
+    display: flex;
 
-/* =====================================================
-                    ALERGIAS
-===================================================== */
+    align-items: center;
 
-.card .alergias{
+    gap: 6px;
 
-    margin-top:8px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:5px;
-
-    font-size:12px;
-
-    color:#6C5050;
-}
-
-
-.card .alergias strong{
-
-    color:#B43F3F;
-
-    font-size:12px;
-
-    font-weight:800;
-}
-
-
-.alergias-lista{
-
-    display:flex;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-}
-
-
-.alergia-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    background:#FCE8E5;
+    background: #FFF3EF;
 
     border:
-        1px solid #F3C2BD;
+        1px solid #F1D2CB;
 
-    border-radius:20px;
+    border-radius: 999px;
 
-    padding:
-        3px
-        9px
-        3px
-        4px;
+    padding: 5px 9px 5px 6px;
 
-    font-size:11px;
+    color: #765B55;
 
-    color:#7A2929;
+    font-size: 12px;
 
-    font-weight:600;
+    font-weight: 600;
 }
 
+.alergia-item img {
+    width: 25px;
+    height: 25px;
 
-.alergia-item img{
+    border-radius: 50%;
 
-    width:23px;
-
-    height:23px;
-
-    object-fit:cover;
-
-    border-radius:50%;
+    object-fit: cover;
 }
 
 
@@ -635,304 +586,66 @@ main{
                         MODAL
 ===================================================== */
 
-.modal{
+.modal {
+    display: none;
 
-    display:none;
+    position: fixed;
 
-    position:fixed;
-
-    inset:0;
+    inset: 0;
 
     background:
-        rgba(75,25,25,.65);
+        rgba(65, 25, 22, .65);
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
+    align-items: center;
 
-    padding:20px;
+    padding: 20px;
 
-    z-index:1000;
+    z-index: 1000;
 
-    backdrop-filter:
-        blur(3px);
+    backdrop-filter: blur(3px);
 }
 
-
-.modal.ativo{
-
-    display:flex;
+.modal.ativo {
+    display: flex;
 }
 
+.modal-content {
+    background: white;
 
-.modal-content{
+    width: min(650px, 100%);
 
-    background:white;
+    max-height: 92vh;
 
-    width:min(600px,100%);
+    overflow-y: auto;
 
-    max-height:90vh;
+    border-radius: 26px;
 
-    overflow-y:auto;
+    overflow-x: hidden;
 
-    border-radius:20px;
-
-    overflow-x:hidden;
-
-    position:relative;
+    position: relative;
 
     animation:
         aparecer .25s ease;
 
     box-shadow:
-        0 20px 60px
-        rgba(80,30,30,.30);
-}
-
-
-.modal-content img{
-
-    width:100%;
-
-    height:300px;
-
-    object-fit:cover;
-}
-
-
-.modal-content h2{
-
-    padding:
-        24px
-        28px
-        10px;
-
-    color:#7A2929;
-
-    font-size:34px;
-}
-
-
-.modal-content p{
-
-    padding:
-        0
-        28px;
-
-    color:#684F4F;
-
-    line-height:1.7;
-
-    margin-bottom:18px;
+        0 20px 60px rgba(0, 0, 0, .25);
 }
 
 
 /* =====================================================
-                    INFORMAÇÕES DO MODAL
+                    IMAGEM DO MODAL
 ===================================================== */
 
-.modal-infos{
+.modal-content > img {
+    width: 100%;
 
-    display:flex;
+    height: 360px;
 
-    justify-content:space-between;
+    object-fit: cover;
 
-    align-items:center;
-
-    padding:
-        0
-        28px
-        20px;
-
-    font-weight:700;
-
-    color:#7A2929;
-
-    gap:12px;
-
-    flex-wrap:wrap;
-}
-
-
-#modalCategoria{
-
-    background:#FCE8E5;
-
-    color:#7A2929;
-
-    padding:
-        8px
-        14px;
-
-    border-radius:999px;
-}
-
-
-#modalPreco{
-
-    font-size:28px;
-
-    color:#D95F59;
-}
-
-
-/* =====================================================
-                QUANTIDADE NO MODAL
-===================================================== */
-
-#modalQuantidade{
-
-    padding:
-        0
-        28px
-        10px;
-
-    color:#765858;
-
-    font-size:14px;
-
-    font-weight:600;
-}
-
-
-/* =====================================================
-            PREÇOS POR TAMANHO NO MODAL
-===================================================== */
-
-#modalPrecosTamanho{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:35px;
-
-    margin:
-        5px
-        28px
-        20px;
-
-    padding:18px;
-
-    background:#FFF5F2;
-
-    border:
-        1px solid #F0D1CC;
-
-    border-radius:12px;
-}
-
-
-.modal-preco-tamanho{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#D95F59;
-
-    font-weight:800;
-
-    font-size:16px;
-}
-
-
-/* =====================================================
-                    ALERGIAS NO MODAL
-===================================================== */
-
-.modal-alergias{
-
-    margin:
-        0
-        28px
-        28px;
-
-    padding:18px;
-
-    background:#FFF7F5;
-
-    border:
-        1px solid #F0D1CC;
-
-    border-radius:12px;
-
-    color:#6B4C4C;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-}
-
-
-.modal-alergias:empty{
-
-    display:none;
-}
-
-
-.modal-alergias strong{
-
-    color:#B43F3F;
-
-    font-size:15px;
-}
-
-
-.modal-alergias-lista{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-}
-
-
-.modal-alergia-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    background:white;
-
-    border:
-        1px solid #E9CCC7;
-
-    border-radius:20px;
-
-    padding:
-        5px
-        10px
-        5px
-        5px;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    color:#7A2929;
-}
-
-
-.modal-alergia-item img{
-
-    width:30px;
-
-    height:30px;
-
-    border-radius:50%;
-
-    object-fit:cover;
+    display: block;
 }
 
 
@@ -940,53 +653,279 @@ main{
                     FECHAR MODAL
 ===================================================== */
 
-#fecharModal{
+#fecharModal {
+    position: absolute;
 
-    position:absolute;
+    top: 14px;
+    right: 18px;
 
-    top:14px;
+    width: 42px;
+    height: 42px;
 
-    right:18px;
+    display: flex;
 
-    width:42px;
+    align-items: center;
+    justify-content: center;
 
-    height:42px;
+    font-size: 32px;
 
-    display:flex;
+    line-height: 1;
 
-    align-items:center;
+    color: white;
 
-    justify-content:center;
-
-    border-radius:50%;
+    cursor: pointer;
 
     background:
-        rgba(90,30,30,.55);
+        rgba(0, 0, 0, .35);
 
-    font-size:30px;
-
-    line-height:1;
-
-    color:white;
-
-    cursor:pointer;
+    border-radius: 50%;
 
     text-shadow:
-        0 2px 6px rgba(0,0,0,.45);
+        0 2px 6px rgba(0, 0, 0, .45);
 
-    z-index:10;
+    z-index: 5;
 
-    transition:.2s;
+    transition: .2s;
+}
+
+#fecharModal:hover {
+    background:
+        rgba(0, 0, 0, .55);
+
+    transform: scale(1.05);
 }
 
 
-#fecharModal:hover{
+/* =====================================================
+                    TÍTULO MODAL
+===================================================== */
 
-    background:
-        rgba(90,30,30,.8);
+.modal-content h2 {
+    padding:
+        25px
+        25px
+        8px;
 
-    transform:
-        scale(1.05);
+    color: #C6534C;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+                    DESCRIÇÃO MODAL
+===================================================== */
+
+.modal-content > p {
+    padding:
+        0
+        25px;
+
+    color: #665550;
+
+    line-height: 1.7;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+                    QUANTIDADE MODAL
+===================================================== */
+
+.modal-quantidade {
+    padding:
+        0
+        25px
+        15px;
+
+    color: #8B716B;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+                    INFORMAÇÕES MODAL
+===================================================== */
+
+.modal-infos {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding:
+        0
+        25px
+        20px;
+
+    font-weight: 700;
+
+    color: #C6534C;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+#modalCategoria {
+    background: #FFE3DB;
+
+    color: #C6534C;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+}
+
+#modalPreco {
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+                PREÇOS POR TAMANHO MODAL
+===================================================== */
+
+.modal-content .precos-tamanho {
+    padding:
+        0
+        25px
+        22px;
+}
+
+.modal-content .preco-tamanho {
+    flex: 1;
+
+    min-width: 110px;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    padding: 11px;
+
+    background: #FFF0EB;
+
+    border: 1px solid #F2D0C8;
+
+    border-radius: 12px;
+}
+
+.modal-content .preco-tamanho strong {
+    font-size: 17px;
+
+    color: #C6534C;
+}
+
+.modal-content .preco-tamanho span {
+    color: #765B55;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+                    ALERGIAS MODAL
+===================================================== */
+
+.modal-alergias {
+    margin:
+        0
+        25px
+        25px;
+
+    padding: 16px;
+
+    background: #FFF6F2;
+
+    border:
+        1px solid #F1D8D1;
+
+    border-radius: 15px;
+}
+
+.modal-alergias > strong {
+    display: block;
+
+    color: #B84D47;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+.modal-alergias-lista {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.modal-alergia-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: white;
+
+    border:
+        1px solid #F0D4CD;
+
+    border-radius: 12px;
+
+    padding: 7px 10px;
+
+    color: #765B55;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.modal-alergia-item img {
+    width: 32px;
+    height: 32px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =====================================================
+                    MENSAGENS
+===================================================== */
+
+.carregando,
+.erro,
+.nenhum-prato {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #8B716B;
+
+    font-size: 17px;
+}
+
+.erro {
+    color: #B84D47;
 }
 
 
@@ -994,20 +933,18 @@ main{
                         ANIMAÇÃO
 ===================================================== */
 
-@keyframes aparecer{
+@keyframes aparecer {
 
-    from{
-
-        opacity:0;
+    from {
+        opacity: 0;
 
         transform:
             translateY(12px)
             scale(.98);
     }
 
-    to{
-
-        opacity:1;
+    to {
+        opacity: 1;
 
         transform:
             translateY(0)
@@ -1021,23 +958,20 @@ main{
                         RODAPÉ
 ===================================================== */
 
-footer{
+footer {
+    margin-top: 50px;
 
-    margin-top:50px;
+    background: #C6534C;
 
-    background:#D95F59;
+    color: white;
 
-    color:white;
+    text-align: center;
 
-    text-align:center;
-
-    padding:26px;
+    padding: 28px;
 }
 
-
-footer p{
-
-    color:#FFE1C7;
+footer p {
+    color: #FFE1D5;
 }
 
 
@@ -1045,50 +979,31 @@ footer p{
                     RESPONSIVIDADE
 ===================================================== */
 
-@media(max-width:1000px){
+@media (max-width: 1000px) {
 
-    main{
-
-        padding-left:20px;
-
-        padding-right:20px;
-    }
-
-
-    .card{
-
-        grid-template-columns:
-            115px
-            minmax(0,1fr)
-            270px;
-    }
-
-
-    .imagem{
-
-        width:95px;
-
-        height:95px;
-
-        margin-left:14px;
-    }
-
-
-    .card .precos-tamanho{
-
-        width:270px;
-
-        gap:12px;
+    header {
+        gap: 20px;
 
         padding:
-            0
-            10px;
+            12px
+            25px;
     }
 
+    .pesquisa input {
+        width: 270px;
+    }
 
-    .card .preco-tamanho{
+    .logo-restaurante {
+        width: 160px;
+        height: 68px;
+    }
 
-        min-width:60px;
+    #listaPratos {
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(290px, 1fr)
+            );
     }
 
 }
@@ -1098,94 +1013,51 @@ footer p{
                     TABLET
 ===================================================== */
 
-@media(max-width:800px){
+@media (max-width: 800px) {
 
-    header{
+    header {
+        min-height: 125px;
 
-        flex-direction:column;
+        flex-wrap: wrap;
 
-        justify-content:center;
+        justify-content: center;
 
-        gap:10px;
-
-        height:120px;
-
-        padding:
-            10px
-            20px;
-
-        text-align:center;
+        padding: 12px 20px;
     }
 
+    .logo {
+        order: 1;
 
-    .pesquisa input{
-
-        width:100%;
-
-        max-width:360px;
+        flex: initial;
     }
 
+    .logo-restaurante {
+        order: 2;
 
-    .banner h2{
-
-        font-size:42px;
+        width: 150px;
+        height: 60px;
     }
 
+    .pesquisa {
+        order: 3;
 
-    .banner p{
+        width: 100%;
 
-        font-size:18px;
+        justify-content: center;
     }
 
+    .pesquisa input {
+        width: 100%;
 
-    /*
-       No tablet os preços descem
-       para uma linha própria.
-    */
-
-    .card{
-
-        grid-template-columns:
-            110px
-            minmax(0,1fr);
-
-        padding:
-            5px
-            0;
+        max-width: 450px;
     }
 
-
-    .imagem{
-
-        width:90px;
-
-        height:90px;
-
-        margin-left:12px;
+    .banner h2 {
+        font-size: 45px;
     }
 
-
-    .card .precos-tamanho{
-
-        grid-column:2;
-
-        width:auto;
-
-        justify-content:flex-start;
-
-        padding:
-            0
-            20px
-            15px
-            8px;
-
-        gap:25px;
-    }
-
-
-    .card .alergias{
-
-        margin-bottom:4px;
+    .banner p {
+        font-size: 18px;
     }
 
 }
@@ -1195,375 +1067,222 @@ footer p{
                     CELULAR
 ===================================================== */
 
-@media(max-width:600px){
+@media (max-width: 600px) {
 
-    header{
+    header {
+        min-height: auto;
 
-        height:auto;
+        flex-direction: column;
 
-        padding:16px;
+        gap: 10px;
+
+        padding: 14px 16px;
+    }
+
+    .logo {
+        order: 2;
+    }
+
+    .logo span {
+        font-size: 15px;
+    }
+
+    .logo-restaurante {
+        order: 1;
+
+        width: 160px;
+        height: 58px;
+    }
+
+    .pesquisa {
+        order: 3;
+
+        width: 100%;
+    }
+
+    .pesquisa input {
+        width: 100%;
+
+        height: 45px;
     }
 
 
-    .logo h1{
+    .banner {
+        min-height: 230px;
 
-        font-size:34px;
+        padding: 35px 18px;
+    }
+
+    .banner h2 {
+        font-size: 36px;
+    }
+
+    .banner p {
+        font-size: 16px;
     }
 
 
-    .logo span{
-
-        font-size:16px;
-    }
-
-
-    .pesquisa{
-
-        width:100%;
-    }
-
-
-    .pesquisa input{
-
-        width:100%;
-
-        max-width:none;
-    }
-
-
-    .banner{
-
-        min-height:220px;
-    }
-
-
-    .banner h2{
-
-        font-size:34px;
-    }
-
-
-    .banner p{
-
-        font-size:16px;
-    }
-
-
-    main{
+    .categorias {
+        gap: 8px;
 
         padding:
+            20px
+            15px;
+    }
+
+    .categoria {
+        padding:
             10px
-            10px
+            16px;
+
+        font-size: 13px;
+    }
+
+
+    main {
+        padding:
+            8px
+            15px
             40px;
     }
 
 
-    #listaPratos{
+    #listaPratos {
+        grid-template-columns: 1fr;
 
-        border-radius:10px;
+        gap: 22px;
     }
 
 
-    /* =============================================
-                    CARD MOBILE
-    ============================================== */
-
-    .card{
-
-        grid-template-columns:
-            88px
-            minmax(0,1fr);
-
-        min-height:auto;
-
-        padding:
-            10px
-            0;
+    .imagem {
+        height: 270px;
     }
 
 
-    .imagem{
-
-        width:78px;
-
-        height:78px;
-
-        margin-left:8px;
-
-        align-self:start;
-
-        margin-top:8px;
-
-        border-radius:11px;
+    .conteudo {
+        padding: 18px;
     }
 
 
-    .conteudo{
-
-        padding:
-            10px
-            10px
-            10px
-            3px;
-
-        gap:6px;
+    .nome {
+        font-size: 23px;
     }
 
 
-    .card .nome{
-
-        font-size:20px;
+    .preco {
+        font-size: 25px;
     }
 
 
-    .card .descricao{
+    .modal {
+        padding: 10px;
+    }
 
-        font-size:13px;
+    .modal-content {
+        width: 100%;
 
-        line-height:1.35;
+        max-height: 94vh;
+
+        border-radius: 20px;
     }
 
 
-    .card .categoria{
-
-        font-size:10px;
+    .modal-content > img {
+        height: 250px;
     }
 
 
-    .card .rodape{
-
-        margin-top:2px;
-    }
-
-
-    .card .preco{
-
-        font-size:17px;
-    }
-
-
-    /* =============================================
-                PREÇOS MOBILE
-    ============================================== */
-
-    .card .precos-tamanho{
-
-        grid-column:2;
-
-        width:100%;
-
-        padding:
-            4px
-            10px
-            10px
-            3px;
-
-        justify-content:flex-start;
-
-        gap:12px;
-    }
-
-
-    .card .preco-tamanho{
-
-        min-width:58px;
-
-        font-size:13px;
-    }
-
-
-    /* =============================================
-                    ALERGIAS MOBILE
-    ============================================== */
-
-    .card .alergias{
-
-        font-size:10px;
-    }
-
-
-    .alergia-item{
-
-        font-size:10px;
-
-        padding:
-            2px
-            7px
-            2px
-            3px;
-    }
-
-
-    .alergia-item img{
-
-        width:20px;
-
-        height:20px;
-    }
-
-
-    /* =============================================
-                    MODAL MOBILE
-    ============================================== */
-
-    .modal{
-
-        padding:10px;
-    }
-
-
-    .modal-content{
-
-        width:100%;
-
-        max-height:94vh;
-
-        border-radius:16px;
-    }
-
-
-    .modal-content img{
-
-        height:220px;
-    }
-
-
-    .modal-content h2{
-
-        font-size:27px;
+    .modal-content h2 {
+        font-size: 28px;
 
         padding:
             20px
             20px
-            10px;
-    }
-
-
-    .modal-content p{
-
-        padding:
-            0
-            20px;
-
-        font-size:14px;
-    }
-
-
-    .modal-infos{
-
-        padding:
-            0
-            20px
-            18px;
-    }
-
-
-    #modalPreco{
-
-        font-size:23px;
-    }
-
-
-    #modalQuantidade{
-
-        padding:
-            0
-            20px
-            10px;
-    }
-
-
-    #modalPrecosTamanho{
-
-        margin:
-            5px
-            20px
-            18px;
-
-        gap:14px;
-
-        padding:
-            14px
             8px;
     }
 
 
-    .modal-preco-tamanho{
-
-        font-size:13px;
+    .modal-content > p {
+        padding:
+            0
+            20px;
     }
 
 
-    .modal-alergias{
+    .modal-quantidade {
+        padding:
+            0
+            20px
+            15px;
+    }
 
+
+    .modal-infos {
+        padding:
+            0
+            20px
+            18px;
+    }
+
+
+    .modal-content .precos-tamanho {
+        padding:
+            0
+            20px
+            20px;
+    }
+
+
+    .modal-content .preco-tamanho {
+        min-width: 80px;
+    }
+
+
+    .modal-alergias {
         margin:
             0
             20px
             20px;
-
-        padding:14px;
-    }
-
-
-    #fecharModal{
-
-        width:38px;
-
-        height:38px;
-
-        font-size:27px;
     }
 
 }
 
 
 /* =====================================================
-                CELULARES MUITO PEQUENOS
+                    CELULAR PEQUENO
 ===================================================== */
 
-@media(max-width:400px){
+@media (max-width: 400px) {
 
-    .card{
-
-        grid-template-columns:
-            70px
-            minmax(0,1fr);
+    .logo-restaurante {
+        width: 145px;
+        height: 55px;
     }
 
-
-    .imagem{
-
-        width:62px;
-
-        height:62px;
-
-        margin-left:5px;
+    .banner h2 {
+        font-size: 32px;
     }
 
-
-    .card .nome{
-
-        font-size:18px;
+    .banner p {
+        font-size: 15px;
     }
 
-
-    .card .descricao{
-
-        font-size:12px;
+    .imagem {
+        height: 240px;
     }
 
-
-    .card .precos-tamanho{
-
-        gap:5px;
+    .precos-tamanho {
+        gap: 5px;
     }
 
+    .preco-pequeno,
+    .preco-medio,
+    .preco-grande {
+        padding:
+            6px
+            8px;
 
-    .card .preco-tamanho{
-
-        min-width:48px;
-
-        font-size:12px;
+        font-size: 12px;
     }
 
 }
@@ -1573,27 +1292,20 @@ footer p{
                     SCROLLBAR
 ===================================================== */
 
-::-webkit-scrollbar{
-
-    width:10px;
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-
-::-webkit-scrollbar-track{
-
-    background:#FFF1ED;
+::-webkit-scrollbar-track {
+    background: #FFF0EB;
 }
 
+::-webkit-scrollbar-thumb {
+    background: #D85F58;
 
-::-webkit-scrollbar-thumb{
-
-    background:#D95F59;
-
-    border-radius:20px;
+    border-radius: 20px;
 }
 
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#B94343;
+::-webkit-scrollbar-thumb:hover {
+    background: #B84D47;
 }
