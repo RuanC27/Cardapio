@@ -39,7 +39,7 @@ header {
 
     gap: 30px;
 
-    padding: 12px 35px 12px 50px;
+    padding: 12px 50px 12px 35px;
 
     box-shadow:
         0 4px 18px rgba(130, 45, 40, 0.20);
@@ -48,27 +48,6 @@ header {
     top: 0;
 
     z-index: 100;
-}
-
-
-/* =====================================================
-                    IDENTIDADE
-===================================================== */
-
-.logo {
-    display: flex;
-    align-items: center;
-
-    flex: 1;
-}
-
-.logo span {
-    color: #FFF1E9;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    letter-spacing: .3px;
 }
 
 
@@ -96,6 +75,8 @@ header {
 .pesquisa {
     display: flex;
     align-items: center;
+
+    margin-left: auto;
 }
 
 .pesquisa input {
@@ -406,7 +387,7 @@ main {
 
 
 /* =====================================================
-                    CATEGORIA
+                    CATEGORIA DO PRATO
 ===================================================== */
 
 .conteudo > .categoria {
@@ -554,7 +535,7 @@ main {
 
     align-items: center;
 
-    gap: 6px;
+    gap: 7px;
 
     background: #FFF3EF;
 
@@ -563,7 +544,7 @@ main {
 
     border-radius: 999px;
 
-    padding: 5px 9px 5px 6px;
+    padding: 5px 10px 5px 6px;
 
     color: #765B55;
 
@@ -572,13 +553,21 @@ main {
     font-weight: 600;
 }
 
-.alergia-item img {
-    width: 25px;
-    height: 25px;
 
-    border-radius: 50%;
+/* SÍMBOLO DA ALERGIA */
+
+.alergia-item img {
+    width: 30px;
+    height: 30px;
+
+    min-width: 30px;
+    min-height: 30px;
+
+    display: block;
 
     object-fit: cover;
+
+    border-radius: 50%;
 }
 
 
@@ -896,9 +885,17 @@ main {
     font-weight: 600;
 }
 
+
+/* SÍMBOLO DA ALERGIA NO MODAL */
+
 .modal-alergia-item img {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+    min-height: 36px;
+
+    display: block;
 
     object-fit: cover;
 
@@ -1016,40 +1013,34 @@ footer p {
 @media (max-width: 800px) {
 
     header {
-        min-height: 125px;
+        min-height: 100px;
 
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
 
-        justify-content: center;
+        justify-content: space-between;
 
         padding: 12px 20px;
     }
 
-    .logo {
-        order: 1;
-
-        flex: initial;
-    }
-
     .logo-restaurante {
-        order: 2;
-
         width: 150px;
         height: 60px;
+
+        flex-shrink: 0;
     }
 
     .pesquisa {
-        order: 3;
+        width: auto;
 
-        width: 100%;
+        margin-left: auto;
 
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .pesquisa input {
         width: 100%;
 
-        max-width: 450px;
+        max-width: 380px;
     }
 
     .banner h2 {
@@ -1079,25 +1070,21 @@ footer p {
         padding: 14px 16px;
     }
 
-    .logo {
-        order: 2;
-    }
-
-    .logo span {
-        font-size: 15px;
-    }
-
     .logo-restaurante {
-        order: 1;
-
         width: 160px;
         height: 58px;
+
+        order: 1;
     }
 
     .pesquisa {
-        order: 3;
+        order: 2;
 
         width: 100%;
+
+        margin-left: 0;
+
+        justify-content: center;
     }
 
     .pesquisa input {
