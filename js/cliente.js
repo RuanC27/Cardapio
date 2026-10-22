@@ -1279,4 +1279,153 @@ function fecharModalPrato() {
                     INICIAR
 ===================================================== */
 
+
+
+/* =====================================================
+   COMANDA DIGITAL — ADIÇÃO SEM SUBSTITUIR O CARDÁPIO
+===================================================== */
+(() => {
+    const estadoComanda = { mesa: null, itens: [] };
+    const dinheiro = valor => Number(valor || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const cabecalhos = {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+    };
+    const urlTabela = (tabela, query = '') => `${SUPABASE_URL}/rest/v1/${tabela}${query}`;
+    const requisitar = async (url, opcoes = {}) => {
+        const resposta = await fetch(url, { ...opcoes, headers: { ...cabecalhos, ...(opcoes.headers || {}) } });
+        const corpo = await resposta.text();
+        let dados = null;
+        try { dados = corpo ? JSON.parse(corpo) : null; } catch (_) { dados = corpo; }
+        if (!resposta.ok) throw new Error((dados && (dados.message || dados.details || dados.hint)) || `Erro HTTP ${resposta.status}`);
+        return dados;
+    };
+
+    const painel = document.createElement('section');
+    painel.id = 'painelComanda';
+    painel.innerHTML = `
+      <div class="comanda-cabecalho"><strong>🧾 Minha comanda</strong><button type="button" id="alternarComanda" aria-expanded="true">Ocultar</button></div>
+      <div id="conteudoComanda">
+        <label for="numeroMesaComanda">Número da mesa</label>
+        <input id="numeroMesaComanda" type="number" min="1" step="1" placeholder="Ex.: 4" inputmode="numeric">
+        <p class="comanda-ajuda">Informe sua mesa antes de enviar o pedido.</p>
+        <div id="itensComanda"><p>Nenhum item adicionado.</p></div>
+        <div class="comanda-total">Total: <strong id="totalComanda">R$ 0,00</strong></div>
+        <button type="button" id="enviarComanda" class="comanda-enviar">Enviar pedido</button>
+        <p id="mensagemComanda" role="status" aria-live="polite"></p>
+      </div>`;
+    document.body.appendChild(painel);
+
+    const lista = painel.querySelector('#itensComanda');
+    const total = painel.querySelector('#totalComanda');
+    const mensagem = painel.querySelector('#mensagemComanda');
+    const campoMesa = painel.querySelector('#numeroMesaComanda');
+
+    painel.querySelector('#alternarComanda').addEventListener('click', e => {
+        const conteudo = painel.querySelector('#conteudoComanda');
+        const oculto = conteudo.hidden;
+        conteudo.hidden = !oculto;
+        e.currentTarget.textContent = oculto ? 'Ocultar' : 'Mostrar';
+        e.currentTarget.setAttribute('aria-expanded', String(oculto));
+    });
+
+    function renderizarComanda() {
+        lista.innerHTML = '';
+        if (!estadoComanda.itens.length) lista.innerHTML = '<p>Nenhum item adicionado.</p>';
+        estadoComanda.itens.forEach((item, indice) => {
+            const linha = document.createElement('div');
+            linha.className = 'comanda-item';
+            const tamanho = item.tamanho ? ` (${item.tamanho})` : '';
+            linha.innerHTML = `<div><strong></strong><small></small><div class="comanda-controles"><button type="button" data-acao="menos">−</button><span>${item.quantidade}</span><button type="button" data-acao="mais">+</button><button type="button" data-acao="remover">Remover</button></div></div><strong>${dinheiro(item.preco * item.quantidade)}</strong>`;
+            linha.querySelector('strong').textContent = item.nome + tamanho;
+            linha.querySelector('small').textContent = `${dinheiro(item.preco)} cada`;
+            linha.querySelector('[data-acao="menos"]').addEventListener('click', () => { if (item.quantidade > 1) item.quantidade--; else estadoComanda.itens.splice(indice, 1); renderizarComanda(); });
+            linha.querySelector('[data-acao="mais"]').addEventListener('click', () => { item.quantidade++; renderizarComanda(); });
+            linha.querySelector('[data-acao="remover"]').addEventListener('click', () => { estadoComanda.itens.splice(indice, 1); renderizarComanda(); });
+            lista.appendChild(linha);
+        });
+        total.textContent = dinheiro(estadoComanda.itens.reduce((s, i) => s + i.preco * i.quantidade, 0));
+    }
+
+    function adicionarPrato(prato) {
+        let tamanho = null;
+        let preco = Number(prato.preco || 0);
+        const tamanhos = [
+            ['Pequeno', prato.preco_pequeno], ['Médio', prato.preco_medio], ['Grande', prato.preco_grande]
+        ].filter(([, p]) => p !== null && p !== undefined && p !== '');
+        if (tamanhos.length) {
+            const escolha = prompt(`Escolha o tamanho de ${prato.nome}:\n${tamanhos.map(([n,p],i) => `${i+1} - ${n}: ${dinheiro(p)}`).join('\n')}\nDigite o número da opção:`);
+            if (escolha === null) return;
+            const selecionado = tamanhos[Number(escolha) - 1];
+            if (!selecionado) { alert('Opção de tamanho inválida.'); return; }
+            tamanho = selecionado[0].toLowerCase(); preco = Number(selecionado[1]);
+        }
+        const qtdTexto = prompt(`Quantas unidades de ${prato.nome}?`, '1');
+        if (qtdTexto === null) return;
+        const quantidade = Number(qtdTexto);
+        if (!Number.isInteger(quantidade) || quantidade < 1) { alert('Informe uma quantidade inteira maior que zero.'); return; }
+        const existente = estadoComanda.itens.find(i => String(i.prato_id) === String(prato.id) && i.tamanho === tamanho && i.preco === preco);
+        if (existente) existente.quantidade += quantidade;
+        else estadoComanda.itens.push({ prato_id: prato.id, nome: prato.nome, tamanho, quantidade, preco });
+        mensagem.textContent = `${prato.nome} adicionado à comanda.`;
+        renderizarComanda();
+        painel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // O botão novo não interfere no clique original do card, que continua abrindo o modal.
+    const observer = new MutationObserver(() => {
+        document.querySelectorAll('#listaPratos .card').forEach(card => {
+            if (card.querySelector('.adicionar-comanda')) return;
+            const nomeEl = card.querySelector('.nome');
+            const prato = pratos.find(p => p.nome === nomeEl?.textContent?.trim());
+            if (!prato) return;
+            const botao = document.createElement('button');
+            botao.type = 'button'; botao.className = 'adicionar-comanda'; botao.textContent = 'Adicionar à comanda';
+            botao.addEventListener('click', evento => { evento.preventDefault(); evento.stopPropagation(); adicionarPrato(prato); });
+            (card.querySelector('.rodape') || card).appendChild(botao);
+        });
+    });
+    observer.observe(listaPratos, { childList: true, subtree: true });
+
+    async function obterOuCriarComanda(mesa) {
+        const existentes = await requisitar(urlTabela('comanda', `?numero_mesa=eq.${mesa}&status=eq.aberta&select=id&limit=1`));
+        if (existentes?.length) return existentes[0].id;
+        try {
+            const criadas = await requisitar(urlTabela('comanda'), { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify({ numero_mesa: mesa, status: 'aberta' }) });
+            if (criadas?.[0]?.id) return criadas[0].id;
+        } catch (erro) {
+            // Pode ter ocorrido envio simultâneo para a mesma mesa; consulta novamente.
+            const reconsulta = await requisitar(urlTabela('comanda', `?numero_mesa=eq.${mesa}&status=eq.aberta&select=id&limit=1`));
+            if (reconsulta?.length) return reconsulta[0].id;
+            throw erro;
+        }
+        throw new Error('Não foi possível abrir a comanda da mesa.');
+    }
+
+    painel.querySelector('#enviarComanda').addEventListener('click', async () => {
+        mensagem.textContent = '';
+        const mesa = Number(campoMesa.value);
+        if (!Number.isInteger(mesa) || mesa < 1) { mensagem.textContent = 'Informe um número de mesa válido.'; return; }
+        if (!estadoComanda.itens.length) { mensagem.textContent = 'Adicione pelo menos um prato antes de enviar.'; return; }
+        const botao = painel.querySelector('#enviarComanda');
+        botao.disabled = true; botao.textContent = 'Enviando...';
+        try {
+            const comandaId = await obterOuCriarComanda(mesa);
+            const pedidos = await requisitar(urlTabela('pedido'), { method: 'POST', headers: { Prefer: 'return=representation' }, body: JSON.stringify({ comanda_id: comandaId, status: 'aguardando_confirmacao' }) });
+            const pedidoId = pedidos?.[0]?.id;
+            if (!pedidoId) throw new Error('O pedido foi criado, mas o Supabase não retornou o ID.');
+            const itens = estadoComanda.itens.map(i => ({ pedido_id: pedidoId, prato_id: i.prato_id, tamanho: i.tamanho, quantidade: i.quantidade, preco_unitario: i.preco }));
+            await requisitar(urlTabela('item_pedido'), { method: 'POST', body: JSON.stringify(itens), headers: { Prefer: 'return=minimal' } });
+            estadoComanda.itens = []; renderizarComanda();
+            mensagem.textContent = `Pedido #${pedidoId} enviado para a mesa ${mesa}, aguardando confirmação do garçom.`;
+        } catch (erro) {
+            mensagem.textContent = `Não foi possível enviar o pedido: ${erro.message}. Confira as políticas RLS de SELECT/INSERT das tabelas comanda, pedido e item_pedido.`;
+        } finally {
+            botao.disabled = false; botao.textContent = 'Enviar pedido';
+        }
+    });
+})();
+
+
 carregarPratos();
