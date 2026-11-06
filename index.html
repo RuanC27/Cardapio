@@ -2,253 +2,122 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio Digital</title>
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
-
-    <!-- =====================================
-         CABEÇALHO
-    ====================================== -->
-
+    <!-- CABEÇALHO -->
     <header>
-
-
-        <!-- =====================================
-             LOGO DO RESTAURANTE
-        ====================================== -->
-
         <img
             src="imagens/logo.png"
             alt="Logo do restaurante"
             class="logo-restaurante"
         >
 
-
-        <!-- =====================================
-             PESQUISA
-        ====================================== -->
-
         <div class="pesquisa">
-
             <input
                 type="text"
                 id="pesquisa"
                 placeholder="Pesquisar prato..."
             >
-
         </div>
-
-
     </header>
 
-
-
-    <!-- =====================================
-         BANNER
-    ====================================== -->
-
+    <!-- BANNER -->
     <section class="banner">
-
         <div class="texto">
-
-            <h2>
-                Bem-vindo!
-            </h2>
+            <h2>Bem-vindo!</h2>
 
             <p>
                 Escolha entre nossos deliciosos pratos preparados
                 com ingredientes selecionados.
             </p>
-
         </div>
-
     </section>
 
-
-
-    <!-- =====================================
-         CATEGORIAS
-    ====================================== -->
-
+    <!-- CATEGORIAS -->
     <section class="categorias">
 
-
-        <button
-            class="categoria ativa"
-            data-categoria="Todos"
-        >
+        <button class="categoria ativa" data-categoria="Todos">
             Todos
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Entradas"
-        >
+        <button class="categoria" data-categoria="Entradas">
             Entradas
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Pratos Principais"
-        >
+        <button class="categoria" data-categoria="Pratos Principais">
             Pratos Principais
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Bebidas"
-        >
+        <button class="categoria" data-categoria="Bebidas">
             Bebidas
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Sobremesas"
-        >
+        <button class="categoria" data-categoria="Sobremesas">
             Sobremesas
         </button>
 
-
-        <!-- NOVAS CATEGORIAS -->
-
-        <button
-            class="categoria"
-            data-categoria="Cuzcuz recheado"
-        >
+        <button class="categoria" data-categoria="Cuzcuz recheado">
             Cuzcuz recheado
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Tapiocas"
-        >
+        <button class="categoria" data-categoria="Tapiocas">
             Tapiocas
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Pizzas"
-        >
+        <button class="categoria" data-categoria="Pizzas">
             Pizzas
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Hambúrgueres"
-        >
+        <button class="categoria" data-categoria="Hambúrgueres">
             Hambúrgueres
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Pastéis"
-        >
+        <button class="categoria" data-categoria="Pastéis">
             Pastéis
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Sugestões do chefe"
-        >
+        <button class="categoria" data-categoria="Sugestões do chefe">
             Sugestões do chefe
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Sugestões premium do chefe"
-        >
+        <button class="categoria" data-categoria="Sugestões premium do chefe">
             Sugestões premium do chefe
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Porções de salada"
-        >
+        <button class="categoria" data-categoria="Porções de salada">
             Porções de salada
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Porções de carne"
-        >
+        <button class="categoria" data-categoria="Porções de carne">
             Porções de carne
         </button>
 
-
-        <button
-            class="categoria"
-            data-categoria="Sucos"
-        >
+        <button class="categoria" data-categoria="Sucos">
             Sucos
         </button>
 
-
     </section>
 
-
-
-    <!-- =====================================
-         LISTA DE PRATOS
-    ====================================== -->
-
+    <!-- LISTA DE PRATOS -->
     <main>
-
         <div id="listaPratos"></div>
-
     </main>
 
-
-
-    <!-- =====================================
-         MODAL DO PRATO
-    ====================================== -->
-
-    <div
-        id="modal"
-        class="modal"
-    >
-
+    <!-- MODAL DO PRATO -->
+    <div id="modal" class="modal">
 
         <div class="modal-content">
-
-
-            <!-- FECHAR -->
 
             <span id="fecharModal">
                 &times;
             </span>
-
-
-            <!-- IMAGEM -->
 
             <img
                 id="modalImagem"
@@ -256,197 +125,92 @@
                 alt="Prato"
             >
 
-
-            <!-- NOME -->
-
             <h2 id="modalNome"></h2>
 
-
-            <!-- DESCRIÇÃO -->
-
             <p id="modalDescricao"></p>
-
-
-            <!-- QUANTIDADE -->
 
             <div
                 id="modalQuantidade"
                 class="modal-quantidade"
             ></div>
 
-
-            <!-- INFORMAÇÕES -->
-
             <div class="modal-infos">
-
-
                 <span id="modalCategoria"></span>
-
-
                 <span id="modalPreco"></span>
-
-
             </div>
 
-
-
-            <!-- =====================================
-                 PREÇOS POR TAMANHO
-            ====================================== -->
-
+            <!-- PREÇOS POR TAMANHO -->
             <div
                 id="modalPrecosTamanho"
                 class="precos-tamanho"
             >
-
 
                 <div
                     id="modalPrecoPequeno"
                     class="preco-tamanho"
                 ></div>
 
-
                 <div
                     id="modalPrecoMedio"
                     class="preco-tamanho"
                 ></div>
-
 
                 <div
                     id="modalPrecoGrande"
                     class="preco-tamanho"
                 ></div>
 
-
             </div>
 
-
-
-            <!-- =====================================
-                 ALERGÊNICOS
-            ====================================== -->
-
+            <!-- ALERGÊNICOS -->
             <div
                 id="modalAlergias"
                 class="modal-alergias"
             ></div>
 
-
         </div>
-
 
     </div>
 
-
-
-    <!-- =====================================
-         MODELO DO CARD
-    ====================================== -->
-
+    <!-- MODELO DO CARD -->
     <template id="cardTemplate">
-
 
         <div class="card">
 
-
-            <!-- =====================================
-                 IMAGEM
-            ====================================== -->
-
             <div class="imagem">
-
-                <img
-                    src=""
-                    alt="Prato"
-                >
-
+                <img src="" alt="Prato">
             </div>
-
-
-
-            <!-- =====================================
-                 CONTEÚDO
-            ====================================== -->
 
             <div class="conteudo">
 
-
-                <!-- NOME -->
-
                 <h3 class="nome"></h3>
-
-
-                <!-- DESCRIÇÃO -->
 
                 <p class="descricao"></p>
 
-
-                <!-- QUANTIDADE -->
-
                 <span class="quantidade"></span>
-
-
-                <!-- CATEGORIA -->
 
                 <span class="categoria"></span>
 
-
-                <!-- =====================================
-                     PREÇO
-                ====================================== -->
-
                 <div class="rodape">
-
                     <span class="preco"></span>
-
                 </div>
-
-
-
-                <!-- =====================================
-                     PREÇOS POR TAMANHO
-                ====================================== -->
 
                 <div class="precos-tamanho">
-
-
                     <span class="preco-pequeno"></span>
-
-
                     <span class="preco-medio"></span>
-
-
                     <span class="preco-grande"></span>
-
-
                 </div>
-
-
-
-                <!-- =====================================
-                     ALERGÊNICOS DO PRATO
-                ====================================== -->
 
                 <div class="alergias"></div>
 
-
             </div>
-
 
         </div>
 
-
     </template>
 
-
-
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
-
+    <!-- JAVASCRIPT -->
     <script src="js/cliente.js"></script>
 
-
 </body>
-
 </html>
