@@ -1296,3 +1296,11 @@ footer p {
 ::-webkit-scrollbar-thumb:hover {
     background: #B84D47;
 }
+
+.imagem-contato {
+    height: 90px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    display: block;
+}
