@@ -11,41 +11,43 @@
 
 <body>
 
-    <!-- CABEÇALHO -->
-    <header>
-        <img
-            src="imagens/logo.png"
-            alt="Logo do restaurante"
-            class="logo-restaurante"
-        >
-
-        <div class="pesquisa">
-            <input
-                type="text"
-                id="pesquisa"
-                placeholder="Pesquisar prato..."
-            >
-        </div>
-
-        <!-- IMAGEM DE CONTATO -->
-        <img
-            src="imagens/contato.png"
-            alt="Contato do restaurante"
-            class="imagem-contato"
-        >
-    </header>
-
-    <!-- BANNER -->
+    <!-- BANNER PRINCIPAL -->
     <section class="banner">
-        <div class="texto">
-            <h2>Bem-vindo!</h2>
 
-            <p>
-                Escolha entre nossos deliciosos pratos preparados
-                com ingredientes selecionados.
-            </p>
+        <div class="banner-layout">
+
+            <!-- TEXTO E PESQUISA -->
+            <div class="texto">
+
+                <h2>Bem-vindo!</h2>
+
+                <p>
+                    Escolha entre nossos deliciosos pratos preparados
+                    com ingredientes selecionados.
+                </p>
+
+                <!-- BARRA DE PESQUISA -->
+                <div class="pesquisa">
+                    <input
+                        type="text"
+                        id="pesquisa"
+                        placeholder="Pesquisar prato..."
+                    >
+                </div>
+
+            </div>
+
+            <!-- IMAGEM DE CONTATO À DIREITA -->
+            <img
+                src="imagens/contato.png"
+                alt="Contato do restaurante"
+                class="imagem-contato"
+            >
+
         </div>
+
     </section>
+
 
     <!-- CATEGORIAS -->
     <section class="categorias">
@@ -112,10 +114,12 @@
 
     </section>
 
+
     <!-- LISTA DE PRATOS -->
     <main>
         <div id="listaPratos"></div>
     </main>
+
 
     <!-- MODAL DO PRATO -->
     <div id="modal" class="modal">
@@ -179,6 +183,7 @@
 
     </div>
 
+
     <!-- MODELO DO CARD -->
     <template id="cardTemplate">
 
@@ -215,6 +220,7 @@
         </div>
 
     </template>
+
 
     <!-- JAVASCRIPT -->
     <script src="js/cliente.js"></script>
