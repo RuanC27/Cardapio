@@ -18,7 +18,10 @@
 body {
     background: #FFF7F3;
     color: #3A2927;
+
     min-height: 100vh;
+
+    padding-top: 0;
 }
 
 
@@ -36,32 +39,19 @@ body {
         center / cover
         no-repeat;
 
-    min-height: 390px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 35px 4%;
-}
-
-
-/* =====================================================
-                    ORGANIZAÇÃO DO BANNER
-===================================================== */
-
-.banner-layout {
-    width: 100%;
-    max-width: 1500px;
+    min-height: 460px;
 
     display: grid;
 
-    grid-template-columns: 350px minmax(0, 1fr);
+    grid-template-columns:
+        minmax(250px, 0.8fr)
+        minmax(0, 1.6fr);
 
     align-items: center;
 
-    gap: 65px;
+    gap: 55px;
+
+    padding: 45px 5%;
 }
 
 
@@ -71,15 +61,18 @@ body {
 
 .imagem-contato {
     width: 100%;
-    height: 350px;
+
+    max-width: 340px;
+
+    max-height: 380px;
+
+    height: auto;
 
     object-fit: contain;
 
     display: block;
 
-    justify-self: start;
-
-    align-self: center;
+    justify-self: center;
 }
 
 
@@ -90,19 +83,23 @@ body {
 .banner .texto {
     width: 100%;
 
-    max-width: 950px;
+    max-width: 850px;
 
     color: white;
 
     text-align: center;
+
+    justify-self: center;
 }
 
 .banner h2 {
     font-size: 58px;
 
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 
     font-weight: 800;
+
+    line-height: 1.2;
 
     text-shadow:
         0 3px 8px rgba(0, 0, 0, .20);
@@ -115,40 +112,37 @@ body {
 
     text-shadow:
         0 2px 5px rgba(0, 0, 0, .20);
-
-    margin-bottom: 22px;
 }
 
 
 /* =====================================================
-                    PESQUISA
+                    BARRA DE PESQUISA
 ===================================================== */
 
 .pesquisa {
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
 
     width: 100%;
 
-    margin-top: 10px;
+    max-width: 520px;
 
-    transform: translateY(9px);
+    margin: 24px auto 0;
 }
 
 .pesquisa input {
     width: 100%;
 
-    max-width: 520px;
-
-    height: 54px;
+    height: 58px;
 
     border: none;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    padding: 0 22px;
+    padding: 0 25px;
 
     background: white;
 
@@ -319,6 +313,7 @@ main {
 
 .imagem img {
     width: 100%;
+
     height: 100%;
 
     object-fit: cover;
@@ -430,7 +425,7 @@ main {
 
 
 /* =====================================================
-                        RODAPÉ
+                        RODAPÉ DO CARD
 ===================================================== */
 
 .rodape {
@@ -561,11 +556,16 @@ main {
     font-weight: 600;
 }
 
+
+/* SÍMBOLO DA ALERGIA */
+
 .alergia-item img {
     width: 30px;
+
     height: 30px;
 
     min-width: 30px;
+
     min-height: 30px;
 
     display: block;
@@ -651,14 +651,17 @@ main {
     position: absolute;
 
     top: 14px;
+
     right: 18px;
 
     width: 42px;
+
     height: 42px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     font-size: 32px;
@@ -890,11 +893,16 @@ main {
     font-weight: 600;
 }
 
+
+/* SÍMBOLO DA ALERGIA NO MODAL */
+
 .modal-alergia-item img {
     width: 36px;
+
     height: 36px;
 
     min-width: 36px;
+
     min-height: 36px;
 
     display: block;
@@ -975,23 +983,29 @@ footer p {
 
 
 /* =====================================================
-                        TABLET
+                    RESPONSIVIDADE
 ===================================================== */
+
+/* TABLETS E TELAS MÉDIAS */
 
 @media (max-width: 1000px) {
 
-    .banner-layout {
-        grid-template-columns: 270px minmax(0, 1fr);
+    .banner {
+        gap: 30px;
 
-        gap: 35px;
+        padding: 40px 4%;
     }
 
     .imagem-contato {
-        height: 300px;
+        max-width: 290px;
     }
 
     .banner h2 {
         font-size: 48px;
+    }
+
+    .pesquisa {
+        max-width: 480px;
     }
 
     #listaPratos {
@@ -1005,103 +1019,99 @@ footer p {
 }
 
 
-/* =====================================================
-                        TABLET PEQUENO
-===================================================== */
+/* TABLET */
 
 @media (max-width: 800px) {
 
     .banner {
-        min-height: 330px;
-
-        padding: 30px 4%;
-    }
-
-    .banner-layout {
-        grid-template-columns: 210px minmax(0, 1fr);
+        grid-template-columns: 200px 1fr;
 
         gap: 25px;
+
+        padding: 35px 20px;
+
+        min-height: 350px;
     }
 
     .imagem-contato {
-        height: 250px;
+        max-width: 200px;
     }
 
     .banner h2 {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     .banner p {
         font-size: 16px;
     }
 
-    .pesquisa input {
-        max-width: 100%;
+    .pesquisa {
+        max-width: 380px;
+
+        margin-top: 20px;
+    }
+
+    #listaPratos {
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(250px, 1fr)
+            );
     }
 
 }
 
 
 /* =====================================================
-                        CELULAR
+                    CELULAR
 ===================================================== */
 
 @media (max-width: 600px) {
 
     .banner {
-        min-height: 280px;
-
-        padding: 25px 15px;
-    }
-
-    .banner-layout {
-        grid-template-columns: 105px minmax(0, 1fr);
+        grid-template-columns: 1fr;
 
         gap: 15px;
+
+        padding: 30px 20px;
+
+        min-height: auto;
     }
 
     .imagem-contato {
-        width: 105px;
-
-        height: 190px;
+        width: 180px;
 
         max-width: 100%;
 
-        object-fit: contain;
+        max-height: 200px;
+
+        justify-self: center;
     }
 
     .banner .texto {
-        min-width: 0;
-
-        text-align: center;
+        width: 100%;
     }
 
     .banner h2 {
-        font-size: 29px;
-
-        margin-bottom: 10px;
-    }
-
-    .banner p {
-        font-size: 13px;
-
-        line-height: 1.45;
+        font-size: 36px;
 
         margin-bottom: 12px;
     }
 
-    .pesquisa {
-        margin-top: 5px;
+    .banner p {
+        font-size: 15px;
+    }
 
-        transform: translateY(5px);
+    .pesquisa {
+        width: 100%;
+
+        margin-top: 20px;
     }
 
     .pesquisa input {
-        height: 43px;
+        height: 48px;
 
-        font-size: 13px;
-
-        padding: 0 12px;
+        font-size: 15px;
     }
 
 
@@ -1232,33 +1242,23 @@ footer p {
 
 
 /* =====================================================
-                    CELULAR PEQUENO
+                CELULAR PEQUENO
 ===================================================== */
 
 @media (max-width: 400px) {
 
-    .banner {
-        padding: 20px 10px;
-    }
-
-    .banner-layout {
-        grid-template-columns: 85px minmax(0, 1fr);
-
-        gap: 10px;
-    }
-
     .imagem-contato {
-        width: 85px;
+        width: 155px;
 
-        height: 160px;
+        max-height: 180px;
     }
 
     .banner h2 {
-        font-size: 25px;
+        font-size: 32px;
     }
 
     .banner p {
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .imagem {
