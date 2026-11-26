@@ -19,8 +19,18 @@ body {
     background: #FFF7F3;
     color: #3A2927;
     min-height: 100vh;
+    padding-top: 124px;
 }
 
+/* CABEÇALHO FIXO */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
 
 /* =====================================================
                         HEADER
