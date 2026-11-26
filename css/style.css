@@ -1,3 +1,4 @@
+
 /* =====================================================
                     CONFIGURAÇÕES GERAIS
 ===================================================== */
@@ -22,18 +23,9 @@ body {
     padding-top: 124px;
 }
 
-/* CABEÇALHO FIXO */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
-}
 
 /* =====================================================
-                        HEADER
+                    HEADER FIXO
 ===================================================== */
 
 header {
@@ -54,10 +46,14 @@ header {
     box-shadow:
         0 4px 18px rgba(130, 45, 40, 0.20);
 
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
 
-    z-index: 100;
+    z-index: 1000;
+
+    box-sizing: border-box;
 }
 
 
@@ -121,6 +117,23 @@ header {
 
 .pesquisa input::placeholder {
     color: #9A8580;
+}
+
+
+/* =====================================================
+                    IMAGEM DE CONTATO
+===================================================== */
+
+.imagem-contato {
+    height: 190px;
+    width: auto;
+    max-width: 130px;
+
+    object-fit: contain;
+
+    display: block;
+
+    flex-shrink: 0;
 }
 
 
@@ -1070,6 +1083,10 @@ footer p {
 
 @media (max-width: 600px) {
 
+    body {
+        padding-top: 230px;
+    }
+
     header {
         min-height: auto;
 
@@ -1078,6 +1095,8 @@ footer p {
         gap: 10px;
 
         padding: 14px 16px;
+
+        position: fixed;
     }
 
     .logo-restaurante {
@@ -1101,6 +1120,16 @@ footer p {
         width: 100%;
 
         height: 45px;
+    }
+
+    .imagem-contato {
+        order: 3;
+
+        height: 75px;
+
+        width: auto;
+
+        max-width: 100px;
     }
 
 
@@ -1305,12 +1334,4 @@ footer p {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #B84D47;
-}
-
-.imagem-contato {
-    height: 190px;
-    width: auto;
-    max-width: 130px;
-    object-fit: contain;
-    display: block;
 }
