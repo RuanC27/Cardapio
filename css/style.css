@@ -36,31 +36,50 @@ body {
         center / cover
         no-repeat;
 
-    min-height: 310px;
+    min-height: 390px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    padding: 40px 5%;
+    padding: 35px 4%;
 }
 
 
 /* =====================================================
-                ORGANIZAÇÃO DO BANNER
+                    ORGANIZAÇÃO DO BANNER
 ===================================================== */
 
 .banner-layout {
     width: 100%;
-    max-width: 1450px;
+    max-width: 1500px;
 
-    display: flex;
+    display: grid;
+
+    grid-template-columns: 350px minmax(0, 1fr);
 
     align-items: center;
-    justify-content: space-between;
 
-    gap: 60px;
+    gap: 65px;
+}
+
+
+/* =====================================================
+                    IMAGEM DE CONTATO
+===================================================== */
+
+.imagem-contato {
+    width: 100%;
+    height: 350px;
+
+    object-fit: contain;
+
+    display: block;
+
+    justify-self: start;
+
+    align-self: center;
 }
 
 
@@ -69,9 +88,9 @@ body {
 ===================================================== */
 
 .banner .texto {
-    flex: 1;
+    width: 100%;
 
-    max-width: 850px;
+    max-width: 950px;
 
     color: white;
 
@@ -97,7 +116,7 @@ body {
     text-shadow:
         0 2px 5px rgba(0, 0, 0, .20);
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 
@@ -112,25 +131,30 @@ body {
     align-items: center;
 
     width: 100%;
+
+    margin-top: 10px;
+
+    transform: translateY(9px);
 }
 
 .pesquisa input {
     width: 100%;
-    max-width: 430px;
 
-    height: 50px;
+    max-width: 520px;
+
+    height: 54px;
 
     border: none;
 
     border-radius: 14px;
 
-    padding: 0 20px;
+    padding: 0 22px;
 
     background: white;
 
     color: #3A2927;
 
-    font-size: 16px;
+    font-size: 17px;
 
     outline: none;
 
@@ -148,26 +172,6 @@ body {
 
 .pesquisa input::placeholder {
     color: #9A8580;
-}
-
-
-/* =====================================================
-                IMAGEM DE CONTATO
-===================================================== */
-
-.imagem-contato {
-    width: 180px;
-    height: 180px;
-
-    max-width: 20%;
-
-    object-fit: contain;
-
-    display: block;
-
-    flex-shrink: 0;
-
-    margin-left: auto;
 }
 
 
@@ -971,18 +975,23 @@ footer p {
 
 
 /* =====================================================
-                    RESPONSIVIDADE
+                        TABLET
 ===================================================== */
 
 @media (max-width: 1000px) {
 
     .banner-layout {
+        grid-template-columns: 270px minmax(0, 1fr);
+
         gap: 35px;
     }
 
     .imagem-contato {
-        width: 150px;
-        height: 150px;
+        height: 300px;
+    }
+
+    .banner h2 {
+        font-size: 48px;
     }
 
     #listaPratos {
@@ -997,36 +1006,37 @@ footer p {
 
 
 /* =====================================================
-                        TABLET
+                        TABLET PEQUENO
 ===================================================== */
 
 @media (max-width: 800px) {
 
     .banner {
-        min-height: 280px;
+        min-height: 330px;
 
-        padding: 35px 4%;
+        padding: 30px 4%;
     }
 
     .banner-layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+
         gap: 25px;
     }
 
+    .imagem-contato {
+        height: 250px;
+    }
+
     .banner h2 {
-        font-size: 45px;
+        font-size: 40px;
     }
 
     .banner p {
-        font-size: 18px;
-    }
-
-    .imagem-contato {
-        width: 125px;
-        height: 125px;
+        font-size: 16px;
     }
 
     .pesquisa input {
-        max-width: 380px;
+        max-width: 100%;
     }
 
 }
@@ -1039,54 +1049,59 @@ footer p {
 @media (max-width: 600px) {
 
     .banner {
-        min-height: 250px;
+        min-height: 280px;
 
-        padding: 30px 18px;
+        padding: 25px 15px;
     }
 
     .banner-layout {
-        gap: 12px;
+        grid-template-columns: 105px minmax(0, 1fr);
 
-        align-items: center;
+        gap: 15px;
+    }
+
+    .imagem-contato {
+        width: 105px;
+
+        height: 190px;
+
+        max-width: 100%;
+
+        object-fit: contain;
     }
 
     .banner .texto {
         min-width: 0;
 
-        flex: 1;
+        text-align: center;
     }
 
     .banner h2 {
-        font-size: 34px;
+        font-size: 29px;
 
         margin-bottom: 10px;
     }
 
     .banner p {
-        font-size: 14px;
+        font-size: 13px;
 
-        line-height: 1.5;
+        line-height: 1.45;
 
-        margin-bottom: 17px;
+        margin-bottom: 12px;
     }
 
-    .imagem-contato {
-        width: 90px;
-        height: 110px;
+    .pesquisa {
+        margin-top: 5px;
 
-        max-width: 28%;
-
-        flex-shrink: 0;
+        transform: translateY(5px);
     }
 
     .pesquisa input {
-        width: 100%;
+        height: 43px;
 
-        height: 44px;
+        font-size: 13px;
 
-        font-size: 14px;
-
-        padding: 0 14px;
+        padding: 0 12px;
     }
 
 
@@ -1223,24 +1238,27 @@ footer p {
 @media (max-width: 400px) {
 
     .banner {
-        padding: 25px 12px;
+        padding: 20px 10px;
     }
 
     .banner-layout {
-        gap: 8px;
-    }
+        grid-template-columns: 85px minmax(0, 1fr);
 
-    .banner h2 {
-        font-size: 29px;
-    }
-
-    .banner p {
-        font-size: 13px;
+        gap: 10px;
     }
 
     .imagem-contato {
-        width: 75px;
-        height: 90px;
+        width: 85px;
+
+        height: 160px;
+    }
+
+    .banner h2 {
+        font-size: 25px;
+    }
+
+    .banner p {
+        font-size: 12px;
     }
 
     .imagem {
