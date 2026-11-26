@@ -19,80 +19,112 @@ body {
     background: #FFF7F3;
     color: #3A2927;
     min-height: 100vh;
-    padding-top: 0;
 }
 
 
 /* =====================================================
-                    HEADER FIXO NO TOPO
+                    BANNER PRINCIPAL
 ===================================================== */
 
-header {
-    min-height: 100px;
+.banner {
+    background:
+        linear-gradient(
+            rgba(197, 78, 70, .72),
+            rgba(197, 78, 70, .72)
+        ),
+        url('../imagens/banner.jpg')
+        center / cover
+        no-repeat;
 
-    background: #E56B63;
+    min-height: 310px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 5%;
+}
+
+
+/* =====================================================
+                ORGANIZAÇÃO DO BANNER
+===================================================== */
+
+.banner-layout {
+    width: 100%;
+    max-width: 1450px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 60px;
+}
+
+
+/* =====================================================
+                    TEXTO DO BANNER
+===================================================== */
+
+.banner .texto {
+    flex: 1;
+
+    max-width: 850px;
 
     color: white;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
+}
 
-    gap: 30px;
+.banner h2 {
+    font-size: 58px;
 
-    padding: 12px 50px 12px 35px;
+    margin-bottom: 16px;
 
-    box-shadow:
-        0 4px 18px rgba(130, 45, 40, 0.20);
+    font-weight: 800;
 
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .20);
+}
 
-    z-index: 1000;
+.banner p {
+    font-size: 20px;
 
-    box-sizing: border-box;
+    line-height: 1.6;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, .20);
+
+    margin-bottom: 25px;
 }
 
 
 /* =====================================================
-                    LOGO RESTAURANTE
-===================================================== */
-
-.logo-restaurante {
-    width: 190px;
-    height: 76px;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    flex-shrink: 0;
-}
-
-
-/* =====================================================
-                        PESQUISA
+                    PESQUISA
 ===================================================== */
 
 .pesquisa {
     display: flex;
+
+    justify-content: center;
     align-items: center;
 
-    margin-left: auto;
+    width: 100%;
 }
 
 .pesquisa input {
-    width: 330px;
-    height: 48px;
+    width: 100%;
+    max-width: 430px;
+
+    height: 50px;
 
     border: none;
 
     border-radius: 14px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
     background: white;
 
@@ -120,72 +152,22 @@ header {
 
 
 /* =====================================================
-                    IMAGEM DE CONTATO
+                IMAGEM DE CONTATO
 ===================================================== */
 
 .imagem-contato {
-    height: 190px;
-    width: auto;
-    max-width: 130px;
+    width: 180px;
+    height: 180px;
+
+    max-width: 20%;
 
     object-fit: contain;
 
     display: block;
 
     flex-shrink: 0;
-}
 
-
-/* =====================================================
-                        BANNER
-===================================================== */
-
-.banner {
-    background:
-        linear-gradient(
-            rgba(197, 78, 70, .72),
-            rgba(197, 78, 70, .72)
-        ),
-        url('../imagens/banner.jpg')
-        center / cover
-        no-repeat;
-
-    min-height: 310px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 50px 20px;
-}
-
-.banner .texto {
-    max-width: 760px;
-
-    color: white;
-}
-
-.banner h2 {
-    font-size: 58px;
-
-    margin-bottom: 16px;
-
-    font-weight: 800;
-
-    text-shadow:
-        0 3px 8px rgba(0, 0, 0, .20);
-}
-
-.banner p {
-    font-size: 20px;
-
-    line-height: 1.6;
-
-    text-shadow:
-        0 2px 5px rgba(0, 0, 0, .20);
+    margin-left: auto;
 }
 
 
@@ -994,21 +976,13 @@ footer p {
 
 @media (max-width: 1000px) {
 
-    header {
-        gap: 20px;
-
-        padding:
-            12px
-            25px;
+    .banner-layout {
+        gap: 35px;
     }
 
-    .pesquisa input {
-        width: 270px;
-    }
-
-    .logo-restaurante {
-        width: 160px;
-        height: 68px;
+    .imagem-contato {
+        width: 150px;
+        height: 150px;
     }
 
     #listaPratos {
@@ -1023,40 +997,19 @@ footer p {
 
 
 /* =====================================================
-                    TABLET
+                        TABLET
 ===================================================== */
 
 @media (max-width: 800px) {
 
-    header {
-        min-height: 100px;
+    .banner {
+        min-height: 280px;
 
-        flex-wrap: nowrap;
-
-        justify-content: space-between;
-
-        padding: 12px 20px;
+        padding: 35px 4%;
     }
 
-    .logo-restaurante {
-        width: 150px;
-        height: 60px;
-
-        flex-shrink: 0;
-    }
-
-    .pesquisa {
-        width: auto;
-
-        margin-left: auto;
-
-        justify-content: flex-end;
-    }
-
-    .pesquisa input {
-        width: 100%;
-
-        max-width: 380px;
+    .banner-layout {
+        gap: 25px;
     }
 
     .banner h2 {
@@ -1067,78 +1020,75 @@ footer p {
         font-size: 18px;
     }
 
+    .imagem-contato {
+        width: 125px;
+        height: 125px;
+    }
+
+    .pesquisa input {
+        max-width: 380px;
+    }
+
 }
 
 
 /* =====================================================
-                    CELULAR
+                        CELULAR
 ===================================================== */
 
 @media (max-width: 600px) {
 
-    body {
-        padding-top: 0;
+    .banner {
+        min-height: 250px;
+
+        padding: 30px 18px;
     }
 
-    header {
-        min-height: auto;
+    .banner-layout {
+        gap: 12px;
 
-        flex-direction: column;
-
-        gap: 10px;
-
-        padding: 14px 16px;
-
-        position: sticky;
-        top: 0;
+        align-items: center;
     }
 
-    .logo-restaurante {
-        width: 160px;
-        height: 58px;
+    .banner .texto {
+        min-width: 0;
 
-        order: 1;
+        flex: 1;
     }
 
-    .pesquisa {
-        order: 2;
+    .banner h2 {
+        font-size: 34px;
 
-        width: 100%;
+        margin-bottom: 10px;
+    }
 
-        margin-left: 0;
+    .banner p {
+        font-size: 14px;
 
-        justify-content: center;
+        line-height: 1.5;
+
+        margin-bottom: 17px;
+    }
+
+    .imagem-contato {
+        width: 90px;
+        height: 110px;
+
+        max-width: 28%;
+
+        flex-shrink: 0;
     }
 
     .pesquisa input {
         width: 100%;
 
-        height: 45px;
+        height: 44px;
+
+        font-size: 14px;
+
+        padding: 0 14px;
     }
 
-    .imagem-contato {
-        order: 3;
-
-        height: 75px;
-
-        width: auto;
-
-        max-width: 100px;
-    }
-
-    .banner {
-        min-height: 230px;
-
-        padding: 35px 18px;
-    }
-
-    .banner h2 {
-        font-size: 36px;
-    }
-
-    .banner p {
-        font-size: 16px;
-    }
 
     .categorias {
         gap: 8px;
@@ -1156,6 +1106,7 @@ footer p {
         font-size: 13px;
     }
 
+
     main {
         padding:
             8px
@@ -1163,27 +1114,33 @@ footer p {
             40px;
     }
 
+
     #listaPratos {
         grid-template-columns: 1fr;
 
         gap: 22px;
     }
 
+
     .imagem {
         height: 270px;
     }
+
 
     .conteudo {
         padding: 18px;
     }
 
+
     .nome {
         font-size: 23px;
     }
 
+
     .preco {
         font-size: 25px;
     }
+
 
     .modal {
         padding: 10px;
@@ -1197,9 +1154,11 @@ footer p {
         border-radius: 20px;
     }
 
+
     .modal-content > img {
         height: 250px;
     }
+
 
     .modal-content h2 {
         font-size: 28px;
@@ -1210,11 +1169,13 @@ footer p {
             8px;
     }
 
+
     .modal-content > p {
         padding:
             0
             20px;
     }
+
 
     .modal-quantidade {
         padding:
@@ -1223,12 +1184,14 @@ footer p {
             15px;
     }
 
+
     .modal-infos {
         padding:
             0
             20px
             18px;
     }
+
 
     .modal-content .precos-tamanho {
         padding:
@@ -1237,9 +1200,11 @@ footer p {
             20px;
     }
 
+
     .modal-content .preco-tamanho {
         min-width: 80px;
     }
+
 
     .modal-alergias {
         margin:
@@ -1257,17 +1222,25 @@ footer p {
 
 @media (max-width: 400px) {
 
-    .logo-restaurante {
-        width: 145px;
-        height: 55px;
+    .banner {
+        padding: 25px 12px;
+    }
+
+    .banner-layout {
+        gap: 8px;
     }
 
     .banner h2 {
-        font-size: 32px;
+        font-size: 29px;
     }
 
     .banner p {
-        font-size: 15px;
+        font-size: 13px;
+    }
+
+    .imagem-contato {
+        width: 75px;
+        height: 90px;
     }
 
     .imagem {
