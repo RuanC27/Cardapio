@@ -475,6 +475,482 @@ main {
 
 .precos-tamanho {
     display: flex;
+/* =====================================================
+                    CONFIGURAÇÕES GERAIS
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family:
+        'Segoe UI',
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+}
+
+body {
+    background: #FFF7F3;
+    color: #3A2927;
+    min-height: 100vh;
+    padding-top: 0;
+}
+
+
+/* =====================================================
+                    HEADER FIXO
+===================================================== */
+
+header {
+    min-height: 100px;
+
+    background: #E56B63;
+
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 12px 50px 12px 35px;
+
+    box-shadow:
+        0 4px 18px rgba(130, 45, 40, 0.20);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+                    LOGO RESTAURANTE
+===================================================== */
+
+.logo-restaurante {
+    width: 190px;
+    height: 76px;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+                        PESQUISA
+===================================================== */
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+}
+
+.pesquisa input {
+    width: 330px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 0 18px;
+
+    background: white;
+
+    color: #3A2927;
+
+    font-size: 16px;
+
+    outline: none;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, .10);
+
+    transition: .25s;
+}
+
+.pesquisa input:focus {
+    box-shadow:
+        0 0 0 3px rgba(255, 225, 210, .8),
+        0 4px 15px rgba(0, 0, 0, .12);
+}
+
+.pesquisa input::placeholder {
+    color: #9A8580;
+}
+
+
+/* =====================================================
+                    IMAGEM DE CONTATO
+===================================================== */
+
+.imagem-contato {
+    height: 190px;
+    width: auto;
+    max-width: 130px;
+
+    object-fit: contain;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+                        BANNER
+===================================================== */
+
+.banner {
+    background:
+        linear-gradient(
+            rgba(197, 78, 70, .72),
+            rgba(197, 78, 70, .72)
+        ),
+        url('../imagens/banner.jpg')
+        center / cover
+        no-repeat;
+
+    min-height: 310px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+.banner .texto {
+    max-width: 760px;
+
+    color: white;
+}
+
+.banner h2 {
+    font-size: 58px;
+
+    margin-bottom: 16px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .20);
+}
+
+.banner p {
+    font-size: 20px;
+
+    line-height: 1.6;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, .20);
+}
+
+
+/* =====================================================
+                    CATEGORIAS
+===================================================== */
+
+.categorias {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    padding: 28px 20px 24px;
+}
+
+.categoria {
+    border: none;
+
+    background: white;
+
+    color: #C6534C;
+
+    padding: 12px 22px;
+
+    border-radius: 999px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(100, 40, 30, .09);
+
+    transition: .25s;
+}
+
+.categoria:hover {
+    background: #FFE2D9;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(100, 40, 30, .12);
+}
+
+.categoria.ativa {
+    background: #E56B63;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px rgba(180, 65, 58, .25);
+}
+
+
+/* =====================================================
+                    CONTEÚDO PRINCIPAL
+===================================================== */
+
+main {
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding:
+        12px
+        30px
+        60px;
+}
+
+
+/* =====================================================
+                    GRID DE PRATOS
+===================================================== */
+
+#listaPratos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(330px, 1fr)
+        );
+
+    gap: 32px;
+
+    align-items: stretch;
+}
+
+
+/* =====================================================
+                        CARD
+===================================================== */
+
+.card {
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(100, 45, 35, .09);
+
+    transition:
+        transform .3s,
+        box-shadow .3s;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(100, 45, 35, .16);
+}
+
+
+/* =====================================================
+                    IMAGEM DO PRATO
+===================================================== */
+
+.imagem {
+    width: 100%;
+
+    height: 285px;
+
+    overflow: hidden;
+
+    background: #F4DDD7;
+}
+
+.imagem img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .4s;
+}
+
+.card:hover .imagem img {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+                    CONTEÚDO DO CARD
+===================================================== */
+
+.conteudo {
+    padding: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    flex: 1;
+}
+
+
+/* =====================================================
+                        NOME
+===================================================== */
+
+.nome {
+    font-size: 25px;
+
+    color: #C6534C;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+                    DESCRIÇÃO
+===================================================== */
+
+.descricao {
+    color: #6F5D59;
+
+    line-height: 1.55;
+
+    min-height: 48px;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+                    QUANTIDADE
+===================================================== */
+
+.quantidade {
+    color: #8B716B;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+                    CATEGORIA DO PRATO
+===================================================== */
+
+.conteudo > .categoria {
+    align-self: flex-start;
+
+    background: #FFE3DB;
+
+    color: #C6534C;
+
+    padding: 6px 13px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow: none;
+
+    cursor: default;
+
+    transform: none;
+}
+
+.conteudo > .categoria:hover {
+    background: #FFE3DB;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+                        RODAPÉ
+===================================================== */
+
+.rodape {
+    margin-top: auto;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    padding-top: 8px;
+}
+
+.preco {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #C6534C;
+}
+
+
+/* =====================================================
+                    PREÇOS POR TAMANHO
+===================================================== */
+
+.precos-tamanho {
+    display: flex;
 
     align-items: center;
 
@@ -885,6 +1361,9 @@ main {
     gap: 10px;
 }
 
+
+/* SÍMBOLO DA ALERGIA NO MODAL */
+
 .modal-alergia-item {
     display: flex;
 
@@ -907,9 +1386,6 @@ main {
 
     font-weight: 600;
 }
-
-
-/* SÍMBOLO DA ALERGIA NO MODAL */
 
 .modal-alergia-item img {
     width: 36px;
@@ -1084,7 +1560,7 @@ footer p {
 @media (max-width: 600px) {
 
     body {
-        padding-top: 230px;
+        padding-top: 0;
     }
 
     header {
