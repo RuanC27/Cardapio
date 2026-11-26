@@ -1,5 +1,3 @@
-
-
 /* =====================================================
                     CONFIGURAÇÕES GERAIS
 ===================================================== */
@@ -20,23 +18,20 @@
 body {
     background: #FFF7F3;
     color: #3A2927;
-
     min-height: 100vh;
-
-    /* Espaço reservado para o cabeçalho fixo */
-    padding-top: 100px;
+    padding-top: 0;
 }
 
 
 /* =====================================================
-                    HEADER FIXO
+                    HEADER FIXO NO TOPO
 ===================================================== */
 
 header {
-    height: 100px;
     min-height: 100px;
 
     background: #E56B63;
+
     color: white;
 
     display: flex;
@@ -50,18 +45,14 @@ header {
     box-shadow:
         0 4px 18px rgba(130, 45, 40, 0.20);
 
-    /* Cabeçalho permanentemente fixo */
-    position: fixed;
-
+    position: sticky;
     top: 0;
     left: 0;
-
     width: 100%;
 
-    z-index: 2000;
+    z-index: 1000;
 
-    /* Evita alterações de posicionamento */
-    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 
@@ -91,8 +82,6 @@ header {
     align-items: center;
 
     margin-left: auto;
-
-    flex-shrink: 1;
 }
 
 .pesquisa input {
@@ -100,11 +89,13 @@ header {
     height: 48px;
 
     border: none;
+
     border-radius: 14px;
 
     padding: 0 18px;
 
     background: white;
+
     color: #3A2927;
 
     font-size: 16px;
@@ -133,7 +124,7 @@ header {
 ===================================================== */
 
 .imagem-contato {
-    height: 76px;
+    height: 190px;
     width: auto;
     max-width: 130px;
 
@@ -584,9 +575,6 @@ main {
     font-weight: 600;
 }
 
-
-/* SÍMBOLO DA ALERGIA */
-
 .alergia-item img {
     width: 30px;
     height: 30px;
@@ -622,7 +610,7 @@ main {
 
     padding: 20px;
 
-    z-index: 3000;
+    z-index: 1000;
 
     backdrop-filter: blur(3px);
 }
@@ -893,9 +881,6 @@ main {
     gap: 10px;
 }
 
-
-/* SÍMBOLO DA ALERGIA NO MODAL */
-
 .modal-alergia-item {
     display: flex;
 
@@ -1009,18 +994,11 @@ footer p {
 
 @media (max-width: 1000px) {
 
-    body {
-        padding-top: 90px;
-    }
-
     header {
-        height: 90px;
-        min-height: 90px;
-
         gap: 20px;
 
         padding:
-            10px
+            12px
             25px;
     }
 
@@ -1050,19 +1028,14 @@ footer p {
 
 @media (max-width: 800px) {
 
-    body {
-        padding-top: 85px;
-    }
-
     header {
-        height: 85px;
-        min-height: 85px;
+        min-height: 100px;
 
         flex-wrap: nowrap;
 
         justify-content: space-between;
 
-        padding: 10px 20px;
+        padding: 12px 20px;
     }
 
     .logo-restaurante {
@@ -1083,13 +1056,7 @@ footer p {
     .pesquisa input {
         width: 100%;
 
-        max-width: 300px;
-    }
-
-    .imagem-contato {
-        height: 65px;
-
-        max-width: 90px;
+        max-width: 380px;
     }
 
     .banner h2 {
@@ -1110,76 +1077,54 @@ footer p {
 @media (max-width: 600px) {
 
     body {
-        padding-top: 75px;
+        padding-top: 0;
     }
 
     header {
-        height: 75px;
-        min-height: 75px;
+        min-height: auto;
 
-        flex-direction: row;
+        flex-direction: column;
 
-        flex-wrap: nowrap;
+        gap: 10px;
 
-        justify-content: space-between;
+        padding: 14px 16px;
 
-        gap: 8px;
-
-        padding: 8px 12px;
-
-        position: fixed;
-
+        position: sticky;
         top: 0;
-        left: 0;
-
-        width: 100%;
     }
 
     .logo-restaurante {
-        width: 125px;
-        height: 55px;
+        width: 160px;
+        height: 58px;
 
         order: 1;
-
-        flex-shrink: 0;
     }
 
     .pesquisa {
         order: 2;
 
-        width: auto;
+        width: 100%;
 
-        margin-left: auto;
+        margin-left: 0;
 
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     .pesquisa input {
         width: 100%;
 
-        max-width: 180px;
-
-        height: 40px;
-
-        font-size: 13px;
-
-        padding: 0 10px;
-
-        border-radius: 10px;
+        height: 45px;
     }
 
     .imagem-contato {
         order: 3;
 
-        height: 50px;
+        height: 75px;
 
         width: auto;
 
-        max-width: 65px;
-
-        flex-shrink: 0;
+        max-width: 100px;
     }
-
 
     .banner {
         min-height: 230px;
@@ -1194,7 +1139,6 @@ footer p {
     .banner p {
         font-size: 16px;
     }
-
 
     .categorias {
         gap: 8px;
@@ -1212,7 +1156,6 @@ footer p {
         font-size: 13px;
     }
 
-
     main {
         padding:
             8px
@@ -1220,33 +1163,27 @@ footer p {
             40px;
     }
 
-
     #listaPratos {
         grid-template-columns: 1fr;
 
         gap: 22px;
     }
 
-
     .imagem {
         height: 270px;
     }
-
 
     .conteudo {
         padding: 18px;
     }
 
-
     .nome {
         font-size: 23px;
     }
 
-
     .preco {
         font-size: 25px;
     }
-
 
     .modal {
         padding: 10px;
@@ -1260,11 +1197,9 @@ footer p {
         border-radius: 20px;
     }
 
-
     .modal-content > img {
         height: 250px;
     }
-
 
     .modal-content h2 {
         font-size: 28px;
@@ -1275,13 +1210,11 @@ footer p {
             8px;
     }
 
-
     .modal-content > p {
         padding:
             0
             20px;
     }
-
 
     .modal-quantidade {
         padding:
@@ -1290,14 +1223,12 @@ footer p {
             15px;
     }
 
-
     .modal-infos {
         padding:
             0
             20px
             18px;
     }
-
 
     .modal-content .precos-tamanho {
         padding:
@@ -1306,11 +1237,9 @@ footer p {
             20px;
     }
 
-
     .modal-content .preco-tamanho {
         min-width: 80px;
     }
-
 
     .modal-alergias {
         margin:
@@ -1328,36 +1257,9 @@ footer p {
 
 @media (max-width: 400px) {
 
-    body {
-        padding-top: 70px;
-    }
-
-    header {
-        height: 70px;
-        min-height: 70px;
-
-        padding: 7px 9px;
-
-        gap: 6px;
-    }
-
     .logo-restaurante {
-        width: 105px;
-        height: 50px;
-    }
-
-    .pesquisa input {
-        max-width: 145px;
-
-        height: 38px;
-
-        font-size: 12px;
-    }
-
-    .imagem-contato {
-        height: 43px;
-
-        max-width: 48px;
+        width: 145px;
+        height: 55px;
     }
 
     .banner h2 {
